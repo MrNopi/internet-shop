@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.19">
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\Main.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\dao\BucketDao.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\dao\implementation\BucketImpl.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\dao\implementation\ItemImpl.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\dao\implementation\OrderImpl.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\dao\implementation\UserImpl.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\dao\ItemDao.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\dao\OrderDao.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\dao\UserDao.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\db\Storage.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\lib\AnnotatedClassMap.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\lib\Dao.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\lib\Factory.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\lib\Inject.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\lib\Injector.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\lib\Service.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\models\Bucket.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\models\Item.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\models\Order.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\models\User.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\services\BucketService.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\services\implementation\BucketServiceImpl.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\services\implementation\ItemServiceImpl.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\services\implementation\OrderServiceImpl.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\services\implementation\UserServiceImpl.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\services\ItemService.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\services\OrderService.java">
+</file>
+<file name="C:\Users\MrNopi\MateAcademy\Projects\internetshop\src\main\java\mate\academy\internetshop\services\UserService.java">
+</file>
+</checkstyle>
