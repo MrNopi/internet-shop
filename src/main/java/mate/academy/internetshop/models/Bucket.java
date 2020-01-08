@@ -5,11 +5,15 @@ import java.util.List;
 
 public class Bucket {
     private Long id;
-    private static User user;
+    private Long userId;
     public List<Item> items = new ArrayList<>();
 
     public Bucket(User user) {
-        this.user = user;
+        this.userId = user.getId();
+    }
+
+    public void setUser(User user) {
+        this.userId = user.getId();
     }
 
     public Long getId() {
@@ -19,5 +23,14 @@ public class Bucket {
     public Bucket setId(long id) {
         this.id = id;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Bucket{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", items=" + items +
+                '}';
     }
 }

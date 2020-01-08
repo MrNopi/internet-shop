@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getUserOrders(User user) {
         return Storage.orders.stream()
-                .filter(x -> x.getUser().getId().equals(user.getId()))
+                .filter(x -> x.getUserId().equals(user.getId()))
                 .collect(Collectors.toList());
     }
 }
