@@ -8,7 +8,7 @@ import mate.academy.internetshop.lib.Dao;
 import mate.academy.internetshop.models.User;
 
 @Dao
-public class UserImpl implements UserDao {
+public class UserDaoImpl implements UserDao {
     private static Long id = 0L;
 
     @Override

@@ -8,7 +8,7 @@ import mate.academy.internetshop.lib.Dao;
 import mate.academy.internetshop.models.Item;
 
 @Dao
-public class ItemImpl implements ItemDao {
+public class ItemDaoImpl implements ItemDao {
     private static Long id = 0L;
 
     @Override

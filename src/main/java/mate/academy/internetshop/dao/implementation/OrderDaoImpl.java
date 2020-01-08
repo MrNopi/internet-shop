@@ -8,7 +8,7 @@ import mate.academy.internetshop.lib.Dao;
 import mate.academy.internetshop.models.Order;
 
 @Dao
-public class OrderImpl implements OrderDao {
+public class OrderDaoImpl implements OrderDao {
 
     private static Long id = 0L;
 

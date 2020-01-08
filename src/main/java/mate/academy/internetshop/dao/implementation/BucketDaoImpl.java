@@ -8,7 +8,7 @@ import mate.academy.internetshop.lib.Dao;
 import mate.academy.internetshop.models.Bucket;
 
 @Dao
-public class BucketImpl implements BucketDao {
+public class BucketDaoImpl implements BucketDao {
     private static Long id = 0L;
 
     @Override

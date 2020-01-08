@@ -15,10 +15,10 @@ public class AnnotatedClassMap {
     private static final Map<Class<?>, Object> classMap = new HashMap<>();
 
     static {
-        classMap.put(UserDao.class, Factory.getUserImpl());
-        classMap.put(BucketDao.class, Factory.getBucketImpl());
-        classMap.put(ItemDao.class, Factory.getItemImpl());
-        classMap.put(OrderDao.class, Factory.getOrderImpl());
+        classMap.put(UserDao.class, Factory.getUserDaoImpl());
+        classMap.put(BucketDao.class, Factory.getBucketDaoImpl());
+        classMap.put(ItemDao.class, Factory.getItemDaoImpl());
+        classMap.put(OrderDao.class, Factory.getOrderDaoImpl());
         classMap.put(UserService.class, Factory.getUserService());
         classMap.put(BucketService.class, Factory.getBucketService());
         classMap.put(ItemService.class, Factory.getItemService());

@@ -1,50 +1,50 @@
 package mate.academy.internetshop.lib;
 
-import mate.academy.internetshop.dao.implementation.BucketImpl;
-import mate.academy.internetshop.dao.implementation.ItemImpl;
-import mate.academy.internetshop.dao.implementation.OrderImpl;
-import mate.academy.internetshop.dao.implementation.UserImpl;
+import mate.academy.internetshop.dao.implementation.BucketDaoImpl;
+import mate.academy.internetshop.dao.implementation.ItemDaoImpl;
+import mate.academy.internetshop.dao.implementation.OrderDaoImpl;
+import mate.academy.internetshop.dao.implementation.UserDaoImpl;
 import mate.academy.internetshop.services.implementation.BucketServiceImpl;
 import mate.academy.internetshop.services.implementation.ItemServiceImpl;
 import mate.academy.internetshop.services.implementation.OrderServiceImpl;
 import mate.academy.internetshop.services.implementation.UserServiceImpl;
 
 public class Factory {
-    private static UserImpl userImpl;
-    private static BucketImpl bucketImpl;
-    private static ItemImpl itemImpl;
-    private static OrderImpl orderImpl;
+    private static UserDaoImpl userDaoImpl;
+    private static BucketDaoImpl bucketDaoImpl;
+    private static ItemDaoImpl itemDaoImpl;
+    private static OrderDaoImpl orderDaoImpl;
     private static UserServiceImpl userService;
     private static BucketServiceImpl bucketService;
     private static ItemServiceImpl itemService;
     private static OrderServiceImpl orderService;
 
-    public static UserImpl getUserImpl() {
-        if (userImpl == null) {
-            userImpl = new UserImpl();
+    public static UserDaoImpl getUserDaoImpl() {
+        if (userDaoImpl == null) {
+            userDaoImpl = new UserDaoImpl();
         }
-        return userImpl;
+        return userDaoImpl;
     }
 
-    public static BucketImpl getBucketImpl() {
-        if (bucketImpl == null) {
-            bucketImpl = new BucketImpl();
+    public static BucketDaoImpl getBucketDaoImpl() {
+        if (bucketDaoImpl == null) {
+            bucketDaoImpl = new BucketDaoImpl();
         }
-        return bucketImpl;
+        return bucketDaoImpl;
     }
 
-    public static ItemImpl getItemImpl() {
-        if (itemImpl == null) {
-            itemImpl = new ItemImpl();
+    public static ItemDaoImpl getItemDaoImpl() {
+        if (itemDaoImpl == null) {
+            itemDaoImpl = new ItemDaoImpl();
         }
-        return itemImpl;
+        return itemDaoImpl;
     }
 
-    public static OrderImpl getOrderImpl() {
-        if (orderImpl == null) {
-            orderImpl = new OrderImpl();
+    public static OrderDaoImpl getOrderDaoImpl() {
+        if (orderDaoImpl == null) {
+            orderDaoImpl = new OrderDaoImpl();
         }
-        return orderImpl;
+        return orderDaoImpl;
     }
 
     public static UserServiceImpl getUserService() {
