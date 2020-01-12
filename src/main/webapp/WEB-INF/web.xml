@@ -43,6 +43,47 @@
         <servlet-name>showAllItems</servlet-name>
         <url-pattern>/Items</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Users</servlet-name>
+        <servlet-class>mate.academy.internetshop.controller.ShowAllUsersController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Users</servlet-name>
+        <url-pattern>/Users</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>deleteItem</servlet-name>
+        <servlet-class>mate.academy.internetshop.controller.DeleteItemController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteItem</servlet-name>
+        <url-pattern>/deleteItem</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>deleteFromBucket</servlet-name>
+        <servlet-class>mate.academy.internetshop.controller.DeleteFromBucketController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteFromBucket</servlet-name>
+        <url-pattern>/deleteFromBucket</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>addToBucket</servlet-name>
+        <servlet-class>mate.academy.internetshop.controller.AddItemInBucketController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addToBucket</servlet-name>
+        <url-pattern>/addToBucket</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ShowBucketItems</servlet-name>
+        <servlet-class>mate.academy.internetshop.controller.ShowBucketItemsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowBucketItems</servlet-name>
+        <url-pattern>/ShowBucketItems</url-pattern>
+    </servlet-mapping>
     <listener>
         <listener-class>mate.academy.internetshop.controller.InjectorInitializer</listener-class>
     </listener>

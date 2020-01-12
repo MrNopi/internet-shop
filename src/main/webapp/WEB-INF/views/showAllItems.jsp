@@ -14,14 +14,18 @@
         <th>Price</th>
         <th>Add</th>
     </tr>
+    <form method="Post"
 <c:forEach var="item" items="${items}">
     <tr>
         <th><c:out value="${item.getName()}"/></th>
         <th><c:out value="${item.getPrice()}"/></th>
-        <th><a href="${pageContext.request.contextPath}/createItem">
-            <c:import url="/createItem" var="item"/>
-            Add item to bucket
+        <th><a href="${pageContext.request.contextPath}/addToBucket?item=${item.getId()}">
+            Add to bucket
         </a></th>
+        <th><a href="${pageContext.request.contextPath}/deleteItem?item=${item.getId()}">
+            Remove Item
+        </a>
+        </th>
     </tr>
 </c:forEach>
 </table>

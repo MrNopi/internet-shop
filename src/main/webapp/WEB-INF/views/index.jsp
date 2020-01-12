@@ -9,6 +9,8 @@
     </style>
 </head>
 <body>
+<a href="${pageContext.request.contextPath}/registration">Registration</a>
+
 <div>
     <h1>User deleting</h1>
     <form action="${pageContext.request.contextPath}/delete">
@@ -29,6 +31,6 @@
 <button type="submit">Show all items</button>
 <button type="button"><a href="${pageContext.request.contextPath}/Users">Show All Users </a></button>
 </form>
-
+<a href="${pageContext.request.contextPath}/ShowBucketItems">My Bucket</a>
 </body>
 </html>

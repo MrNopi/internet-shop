@@ -1,8 +1,8 @@
 package mate.academy.internetshop.services;
 
-import mate.academy.internetshop.models.User;
-
 import java.util.List;
+
+import mate.academy.internetshop.models.User;
 
 public interface UserService {
 
