@@ -5,10 +5,45 @@
          version="3.1">
     <servlet>
         <servlet-name>index</servlet-name>
-        <servlet-class>mate.academy.internetshop.controller.indexController</servlet-class>
+        <servlet-class>mate.academy.internetshop.controller.IndexController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
         <url-pattern>/index</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>registration</servlet-name>
+        <servlet-class>mate.academy.internetshop.controller.RegistrationController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registration</servlet-name>
+        <url-pattern>/registration</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>deleteUser</servlet-name>
+        <servlet-class>mate.academy.internetshop.controller.DeleteUserController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteUser</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>createItem</servlet-name>
+        <servlet-class>mate.academy.internetshop.controller.CreateItemController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>createItem</servlet-name>
+        <url-pattern>/createItem</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>showAllItems</servlet-name>
+        <servlet-class>mate.academy.internetshop.controller.ShowAllItemsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>showAllItems</servlet-name>
+        <url-pattern>/Items</url-pattern>
+    </servlet-mapping>
+    <listener>
+        <listener-class>mate.academy.internetshop.controller.InjectorInitializer</listener-class>
+    </listener>
 </web-app>
