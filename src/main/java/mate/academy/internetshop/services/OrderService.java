@@ -18,5 +18,5 @@ public interface OrderService {
 
     public Order completeOrder(List<Item> items, User user);
 
-    public List<Order> getUserOrders(User user);
+    public List<Order> getUserOrders(Long userId);
 }

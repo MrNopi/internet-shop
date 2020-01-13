@@ -14,8 +14,7 @@ public class ShowAllUsersController extends HttpServlet {
     private static UserService userService;
 
     @Override
-    protected void doGet(HttpServletRequest req,
-                         HttpServletResponse resp)
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         req.setAttribute("users", userService.getAllUsers());
         req.getRequestDispatcher("WEB-INF/views/showAllUsers.jsp").forward(req, resp);
