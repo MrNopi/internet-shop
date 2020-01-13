@@ -107,6 +107,7 @@
         <servlet-name>ShowAllOrders</servlet-name>
         <url-pattern>/ShowAllOrders</url-pattern>
     </servlet-mapping>
+
     <listener>
         <listener-class>mate.academy.internetshop.controller.InjectorInitializer</listener-class>
     </listener>
