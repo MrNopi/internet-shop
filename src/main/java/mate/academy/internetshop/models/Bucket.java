@@ -8,10 +8,6 @@ public class Bucket {
     private Long userId;
     public List<Item> items = new ArrayList<>();
 
-    public Bucket setUser(User user) {
-        this.userId = user.getId();
-        return this;
-
     public Bucket(User user) {
         this.userId = user.getId();
     }
@@ -29,21 +25,6 @@ public class Bucket {
         return this;
     }
 
-    public List<Item> getAllItems() {
-        return items;
-    }
-
-    @Override
-    public String toString() {
-        return "Bucket{"
-                + "id="
-                + id
-                + ", userId="
-                + userId
-                + ", items="
-                + items
-                + '}';
-      
     @Override
     public String toString() {
         return "Bucket{" +
