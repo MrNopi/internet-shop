@@ -20,7 +20,12 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
+<<<<<<< HEAD
     public Bucket get(Long bucketId) {
+=======
+
+    public Bucket get(long bucketId) {
+>>>>>>> ae9531dcb856049c9dfb5adf9f4ae92df9088142
         return bucketDao.get(bucketId).orElse(bucketDao.create(new Bucket()));
     }
 

@@ -11,6 +11,13 @@ public class Bucket {
     public Bucket setUser(User user) {
         this.userId = user.getId();
         return this;
+
+    public Bucket(User user) {
+        this.userId = user.getId();
+    }
+
+    public void setUser(User user) {
+        this.userId = user.getId();
     }
 
     public Long getId() {
@@ -36,5 +43,13 @@ public class Bucket {
                 + ", items="
                 + items
                 + '}';
+      
+    @Override
+    public String toString() {
+        return "Bucket{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", items=" + items +
+                '}';
     }
 }
