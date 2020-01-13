@@ -13,10 +13,10 @@
 
 <div>
     <h1>User deleting</h1>
-    <form action="${pageContext.request.contextPath}/delete">
+    <form method="post" action="${pageContext.request.contextPath}/delete">
         <p3>Enter user id to remove</p3>
-        <input type="number" name="id">
-        <button>Delete</button>
+        <input type="number" name="Id">
+        <button type="submit">Delete</button>
     </form>
 </div>
 <div>

@@ -8,21 +8,18 @@
 </head>
 <body>
 <h1>Items: </h1>
-<form action="${pageContext.request.contextPath}/createItem">
 <table border="1">
     <tr>
         <th>Id</th>
         <th>Name</th>
-        <th>Delete</th>
     </tr>
     <c:forEach var="user" items="${users}">
         <tr>
             <th><c:out value="${user.getId()}"/></th>
             <th><c:out value="${user.getName()}"/></th>
-            <th><button type="submit">Add item to bucket</button></th>
         </tr>
     </c:forEach>
 </table>
-</form>
+<a href="${pageContext.request.contextPath}/index">Back to the main</a>
 </body>
 </html>
