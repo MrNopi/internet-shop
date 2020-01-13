@@ -6,6 +6,18 @@ public class User {
     private String surname;
     private String password;
 
+    public User(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -28,43 +40,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public User(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public User setId(Long id) {
-        this.id = id;
-        return this;
-    }
-=======
-    private String name;
-
-    public User(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public User setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    private Long id;
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
     }
 }

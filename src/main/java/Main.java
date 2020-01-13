@@ -35,7 +35,7 @@ public class Main {
         Bucket bucket = new Bucket(vasya);
         bucketService.create(bucket);
         System.out.println(bucketService.get(bucket.getId()));
-        bucket.setUser(jeremy);
+        bucket.setUserId(jeremy.getId());
         System.out.println("Vasya: " + vasya.getId());
         System.out.println("Jeremy: " + jeremy.getId());
         System.out.println(bucketService.update(bucket));

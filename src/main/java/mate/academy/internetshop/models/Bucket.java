@@ -8,15 +8,7 @@ public class Bucket {
     private Long userId;
     public List<Item> items = new ArrayList<>();
 
-    public Bucket setUser(User user) {
-        this.userId = user.getId();
-        return this;
-
     public Bucket(User user) {
-        this.userId = user.getId();
-    }
-
-    public void setUser(User user) {
         this.userId = user.getId();
     }
 
@@ -24,9 +16,24 @@ public class Bucket {
         return id;
     }
 
-    public Bucket setId(long id) {
+    public void setId(Long id) {
         this.id = id;
-        return this;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     public List<Item> getAllItems() {
@@ -43,13 +50,5 @@ public class Bucket {
                 + ", items="
                 + items
                 + '}';
-      
-    @Override
-    public String toString() {
-        return "Bucket{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", items=" + items +
-                '}';
     }
 }

@@ -1,6 +1,8 @@
 package mate.academy.internetshop.services.implementation;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+
 import mate.academy.internetshop.dao.BucketDao;
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.lib.Service;
@@ -22,7 +24,7 @@ public class BucketServiceImpl implements BucketService {
     @Override
 
     public Bucket get(long bucketId) {
-        return bucketDao.get(bucketId).orElse(bucketDao.create(new Bucket()));
+        return bucketDao.get(bucketId).orElseThrow(NoSuchElementException::new);
     }
 
     @Override
