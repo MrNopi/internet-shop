@@ -1,7 +1,6 @@
 package mate.academy.internetshop.services;
 
 import java.util.List;
-import java.util.Optional;
 import mate.academy.internetshop.models.Bucket;
 import mate.academy.internetshop.models.Item;
 
@@ -9,7 +8,7 @@ public interface BucketService {
 
     public Bucket create(Bucket bucket);
 
-    public Optional<Bucket> get(long bucketId);
+    public Bucket get(long bucketId);
 
     public Bucket update(Bucket bucket);
 

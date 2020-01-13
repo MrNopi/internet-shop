@@ -22,24 +22,30 @@ public class Item {
         return name;
     }
 
-    public void setName(String name) {
+    public Item setName(String name) {
         this.name = name;
+        return this;
     }
 
     public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public Item setPrice(Double price) {
         this.price = price;
+        return this;
     }
 
     @Override
     public String toString() {
-        return "Item{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                '}';
-    }
+        return "Item{"
+                + "id="
+                + id
+                + ", name='"
+                + name
+                + '\''
+                + ", price="
+                + price
+                + '}';
+  }
 }
