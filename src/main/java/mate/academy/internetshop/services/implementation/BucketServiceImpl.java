@@ -20,7 +20,7 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public Bucket get(long bucketId) {
+    public Bucket get(Long bucketId) {
         return bucketDao.get(bucketId).orElse(bucketDao.create(new Bucket()));
     }
 
@@ -30,7 +30,7 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public boolean delete(long bucketId) {
+    public boolean delete(Long bucketId) {
         return bucketDao.delete(bucketId);
     }
 

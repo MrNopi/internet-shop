@@ -75,7 +75,6 @@
         <servlet-name>addToBucket</servlet-name>
         <url-pattern>/addToBucket</url-pattern>
     </servlet-mapping>
-
     <servlet>
         <servlet-name>ShowBucketItems</servlet-name>
         <servlet-class>mate.academy.internetshop.controller.ShowBucketItemsController</servlet-class>
@@ -83,6 +82,30 @@
     <servlet-mapping>
         <servlet-name>ShowBucketItems</servlet-name>
         <url-pattern>/ShowBucketItems</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CompleteOrder</servlet-name>
+        <servlet-class>mate.academy.internetshop.controller.CompleteOrderController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CompleteOrder</servlet-name>
+        <url-pattern>/CompleteOrder</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>deleteOrder</servlet-name>
+        <servlet-class>mate.academy.internetshop.controller.RemoveOrderController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteOrder</servlet-name>
+        <url-pattern>/deleteOrder</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ShowAllOrders</servlet-name>
+        <servlet-class>mate.academy.internetshop.controller.ShowAllOrdersController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowAllOrders</servlet-name>
+        <url-pattern>/ShowAllOrders</url-pattern>
     </servlet-mapping>
     <listener>
         <listener-class>mate.academy.internetshop.controller.InjectorInitializer</listener-class>

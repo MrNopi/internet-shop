@@ -8,11 +8,11 @@ public interface BucketService {
 
     public Bucket create(Bucket bucket);
 
-    public Bucket get(long bucketId);
+    public Bucket get(Long bucketId);
 
     public Bucket update(Bucket bucket);
 
-    public boolean delete(long bucketId);
+    public boolean delete(Long bucketId);
 
     public void addItem(Bucket bucket, Item item);
 

@@ -32,5 +32,6 @@
 <button type="button"><a href="${pageContext.request.contextPath}/Users">Show All Users </a></button>
 </form>
 <a href="${pageContext.request.contextPath}/ShowBucketItems">My Bucket</a>
+<a href="${pageContext.request.contextPath}/ShowAllOrders">Show all orders</a>
 </body>
 </html>
