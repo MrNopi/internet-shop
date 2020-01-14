@@ -6,10 +6,11 @@ import mate.academy.internetshop.dao.OrderDao;
 import mate.academy.internetshop.db.Storage;
 import mate.academy.internetshop.lib.Dao;
 import mate.academy.internetshop.models.Order;
+import org.apache.log4j.Logger;
 
 @Dao
 public class OrderDaoImpl implements OrderDao {
-
+    private static final Logger LOGGER = Logger.getLogger(OrderDaoImpl.class);
     private static Long id = 0L;
 
     @Override
@@ -28,20 +29,30 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Order update(Order order) {
-        Order temp = Storage.orders.stream()
-                .filter(x -> x.getId().equals(order.getId()))
-                .findFirst().orElseThrow(NoSuchElementException::new);
+        Order temp = null;
+        try {
+            temp = Storage.orders.stream()
+                    .filter(x -> x.getId().equals(order.getId()))
+                    .findFirst().orElseThrow(NoSuchElementException::new);
+        } catch (NoSuchElementException e) {
+            LOGGER.error("No such element in Storage");
+        }
         int index = Storage.orders.indexOf(temp);
         return Storage.orders.set(index, order);
     }
 
     @Override
     public boolean delete(Long orderId) {
-        Order toRemove = Storage.orders.stream()
-                .filter(x -> x.getId().equals(orderId))
-                .findFirst()
-                .orElseThrow(NoSuchElementException::new);
-        Storage.orders.remove(toRemove);
-        return true;
+        boolean isRemoved = false;
+        try {
+            Order toRemove = Storage.orders.stream()
+                    .filter(x -> x.getId().equals(orderId))
+                    .findFirst()
+                    .orElseThrow(NoSuchElementException::new);
+            isRemoved = Storage.orders.remove(toRemove);
+        } catch (NoSuchElementException e) {
+            LOGGER.error("No such element in Storage");
+        }
+        return isRemoved;
     }
 }

@@ -9,12 +9,13 @@ import mate.academy.internetshop.lib.Service;
 import mate.academy.internetshop.models.Bucket;
 import mate.academy.internetshop.models.Item;
 import mate.academy.internetshop.services.BucketService;
+import org.apache.log4j.Logger;
 
 @Service
 public class BucketServiceImpl implements BucketService {
-
     @Inject
     static BucketDao bucketDao;
+    private static final Logger LOGGER = Logger.getLogger(BucketServiceImpl.class);
 
     @Override
     public Bucket create(Bucket bucket) {
@@ -24,7 +25,13 @@ public class BucketServiceImpl implements BucketService {
     @Override
 
     public Bucket get(long bucketId) {
-        return bucketDao.get(bucketId).orElseThrow(NoSuchElementException::new);
+        Bucket bucket = null;
+        try {
+            bucket = bucketDao.get(bucketId).get();
+        } catch (NoSuchElementException e) {
+            LOGGER.error("No such element in Storage");
+        }
+        return bucket;
     }
 
     @Override

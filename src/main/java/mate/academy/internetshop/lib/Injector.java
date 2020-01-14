@@ -1,5 +1,7 @@
 package mate.academy.internetshop.lib;
 
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -14,12 +16,13 @@ import java.util.List;
 public class Injector {
     private static final String PROJECT_MAIN_PACKAGE = "mate.academy.internetshop";
     private static List<Class> classes = new ArrayList<>();
+    private static final Logger LOGGER = Logger.getLogger(Injector.class);
 
     static {
         try {
             classes.addAll(getClasses(PROJECT_MAIN_PACKAGE));
         } catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
+            LOGGER.error("Class not found");
         }
     }
 

@@ -8,11 +8,13 @@ import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.lib.Service;
 import mate.academy.internetshop.models.User;
 import mate.academy.internetshop.services.UserService;
+import org.apache.log4j.Logger;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Inject
     private static UserDao userDao;
+    private static final Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
 
     @Override
     public User create(User user) {
@@ -20,8 +22,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User get(long userId) {
-        return userDao.get(userId).orElseThrow(NoSuchElementException::new);
+    public User get(Long userId) {
+        User user = null;
+        try {
+            user = userDao.get(userId)
+                    .get();
+        } catch (NoSuchElementException e) {
+            LOGGER.error("No such element in Storage");
+        }
+        return user;
     }
 
     @Override
@@ -30,7 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean delete(long userId) {
+    public boolean delete(Long userId) {
         return userDao.delete(userId);
     }
 

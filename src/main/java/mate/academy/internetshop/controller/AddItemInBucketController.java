@@ -18,12 +18,10 @@ public class AddItemInBucketController extends HttpServlet {
     private static BucketService bucketService;
     @Inject
     private static ItemService itemService;
-    private static final Logger logger = Logger.getLogger(AddItemInBucketController.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        logger.error("There is no such element");
         Long itemId = Long.valueOf(req.getParameter("itemId"));
         Bucket bucket = bucketService.get(USER_ID);
         bucketService.addItem(bucket, itemService.get(itemId));
