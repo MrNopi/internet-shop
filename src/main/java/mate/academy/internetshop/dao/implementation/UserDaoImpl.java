@@ -6,12 +6,10 @@ import mate.academy.internetshop.dao.UserDao;
 import mate.academy.internetshop.db.Storage;
 import mate.academy.internetshop.lib.Dao;
 import mate.academy.internetshop.models.User;
-import org.apache.log4j.Logger;
 
 @Dao
 public class UserDaoImpl implements UserDao {
     private static Long id = 0L;
-    private static final Logger LOGGER = Logger.getLogger(UserDaoImpl.class);
 
     @Override
     public User create(User user) {
@@ -29,7 +27,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User update(User user) {
-        LOGGER.error("Error occured when tried to update bucket");
             User toUpdate = Storage.users.stream()
                     .filter(x -> x.getId().equals(user.getId()))
                     .findFirst()
@@ -40,7 +37,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean delete(long userId) {
-        LOGGER.error("Error occured when tried to delete user");
             User toRemove = Storage.users.stream()
                     .filter(x -> x.getId().equals(userId))
                     .findFirst()

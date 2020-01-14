@@ -6,11 +6,9 @@ import mate.academy.internetshop.dao.OrderDao;
 import mate.academy.internetshop.db.Storage;
 import mate.academy.internetshop.lib.Dao;
 import mate.academy.internetshop.models.Order;
-import org.apache.log4j.Logger;
 
 @Dao
 public class OrderDaoImpl implements OrderDao {
-    private static final Logger LOGGER = Logger.getLogger(OrderDaoImpl.class);
     private static Long id = 0L;
 
     @Override
@@ -29,7 +27,6 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Order update(Order order) {
-        LOGGER.error("Error occured when tried to update order");
             Order temp = Storage.orders.stream()
                     .filter(x -> x.getId().equals(order.getId()))
                     .findFirst().orElseThrow(NoSuchElementException::new);
@@ -39,7 +36,6 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public boolean delete(Long orderId) {
-        LOGGER.error("Error occured when tried to delete order");
             Order toRemove = Storage.orders.stream()
                     .filter(x -> x.getId().equals(orderId))
                     .findFirst()

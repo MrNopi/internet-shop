@@ -6,12 +6,10 @@ import mate.academy.internetshop.dao.BucketDao;
 import mate.academy.internetshop.db.Storage;
 import mate.academy.internetshop.lib.Dao;
 import mate.academy.internetshop.models.Bucket;
-import org.apache.log4j.Logger;
 
 @Dao
 public class BucketDaoImpl implements BucketDao {
     private static Long id = 0L;
-    private static final Logger LOGGER = Logger.getLogger(BucketDaoImpl.class);
 
     @Override
     public Bucket create(Bucket bucket) {
@@ -30,7 +28,6 @@ public class BucketDaoImpl implements BucketDao {
 
     @Override
     public Bucket update(Bucket bucket) {
-        LOGGER.error("Error occured when tried to update bucket");
             Bucket buck = Storage.buckets
                     .stream()
                     .filter(x -> x.getId().equals(bucket.getId()))
@@ -42,7 +39,6 @@ public class BucketDaoImpl implements BucketDao {
 
     @Override
     public boolean delete(long bucketId) {
-        LOGGER.error("Error occured when tried to update bucket");
         return Storage.buckets.remove(Storage.buckets
                 .stream()
                 .filter(x -> x.getId().equals(bucketId))

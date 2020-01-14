@@ -8,13 +8,11 @@ import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.lib.Service;
 import mate.academy.internetshop.models.User;
 import mate.academy.internetshop.services.UserService;
-import org.apache.log4j.Logger;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Inject
     private static UserDao userDao;
-    private static final Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
 
     @Override
     public User create(User user) {
@@ -23,7 +21,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User get(Long userId) {
-        LOGGER.error("Error occured when tried to update bucket");
             User user = userDao.get(userId)
                     .orElseThrow(NoSuchElementException::new);
         return user;
