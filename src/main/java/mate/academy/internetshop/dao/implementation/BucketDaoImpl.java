@@ -2,6 +2,7 @@ package mate.academy.internetshop.dao.implementation;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
+
 import mate.academy.internetshop.dao.BucketDao;
 import mate.academy.internetshop.db.Storage;
 import mate.academy.internetshop.lib.Dao;
@@ -49,11 +50,11 @@ public class BucketDaoImpl implements BucketDao {
     public boolean delete(long bucketId) {
         boolean isRemoved = false;
         try {
-        isRemoved = Storage.buckets.remove(Storage.buckets
-                .stream()
-                .filter(x -> x.getId().equals(bucketId))
-                .findFirst()
-                .get());
+            isRemoved = Storage.buckets.remove(Storage.buckets
+                    .stream()
+                    .filter(x -> x.getId().equals(bucketId))
+                    .findFirst()
+                    .get());
         } catch (NoSuchElementException e) {
             LOGGER.error("There is no such an element in storage");
         }

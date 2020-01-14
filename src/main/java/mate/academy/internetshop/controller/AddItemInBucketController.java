@@ -10,7 +10,6 @@ import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.models.Bucket;
 import mate.academy.internetshop.services.BucketService;
 import mate.academy.internetshop.services.ItemService;
-import org.apache.log4j.Logger;
 
 public class AddItemInBucketController extends HttpServlet {
     private static final Long USER_ID = 1L;

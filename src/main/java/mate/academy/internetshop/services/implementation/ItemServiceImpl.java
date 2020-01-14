@@ -2,6 +2,7 @@ package mate.academy.internetshop.services.implementation;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+
 import mate.academy.internetshop.dao.ItemDao;
 import mate.academy.internetshop.db.Storage;
 import mate.academy.internetshop.lib.Inject;
@@ -25,7 +26,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Item get(Long itemId) {
         Item item = null;
-        try{
+        try {
             item = itemDao.get(itemId).get();
         } catch (NoSuchElementException e) {
             LOGGER.error("No such element in Storage");
