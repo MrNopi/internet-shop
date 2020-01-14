@@ -46,9 +46,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getUserOrders(User user) {
+    public List<Order> getUserOrders(Long userId) {
         return Storage.orders.stream()
-                .filter(x -> x.getUserId().equals(user.getId()))
+                .filter(x -> x.getUserId().equals(userId))
                 .collect(Collectors.toList());
     }
 }
