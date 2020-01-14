@@ -13,7 +13,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User create(User user) {
-        Storage.users.add(user.setId(++id));
+        user.setId(++id);
+        Storage.users.add(user);
         return user;
     }
 

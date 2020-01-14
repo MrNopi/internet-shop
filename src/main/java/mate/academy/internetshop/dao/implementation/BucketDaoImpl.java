@@ -13,7 +13,8 @@ public class BucketDaoImpl implements BucketDao {
 
     @Override
     public Bucket create(Bucket bucket) {
-        Storage.buckets.add(bucket.setId(++id));
+        bucket.setId(++id);
+        Storage.buckets.add(bucket);
         return bucket;
     }
 
