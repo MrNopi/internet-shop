@@ -2,7 +2,6 @@ package mate.academy.internetshop.dao.implementation;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
-
 import mate.academy.internetshop.dao.BucketDao;
 import mate.academy.internetshop.db.Storage;
 import mate.academy.internetshop.lib.Dao;
@@ -31,33 +30,23 @@ public class BucketDaoImpl implements BucketDao {
 
     @Override
     public Bucket update(Bucket bucket) {
-        Bucket buck = null;
-        try {
-            buck = Storage.buckets
+        LOGGER.error("Error occured when tried to update bucket");
+            Bucket buck = Storage.buckets
                     .stream()
                     .filter(x -> x.getId().equals(bucket.getId()))
                     .findFirst()
-                    .get();
+                    .orElseThrow(NoSuchElementException::new);
             int index = Storage.buckets.indexOf(buck);
             return Storage.buckets.set(index, bucket);
-        } catch (NoSuchElementException e) {
-            LOGGER.error("There is no such an element in storage");
-        }
-        return buck;
     }
 
     @Override
     public boolean delete(long bucketId) {
-        boolean isRemoved = false;
-        try {
-            isRemoved = Storage.buckets.remove(Storage.buckets
-                    .stream()
-                    .filter(x -> x.getId().equals(bucketId))
-                    .findFirst()
-                    .get());
-        } catch (NoSuchElementException e) {
-            LOGGER.error("There is no such an element in storage");
-        }
-        return isRemoved;
+        LOGGER.error("Error occured when tried to update bucket");
+        return Storage.buckets.remove(Storage.buckets
+                .stream()
+                .filter(x -> x.getId().equals(bucketId))
+                .findFirst()
+                .orElseThrow(NoSuchElementException::new));
     }
 }

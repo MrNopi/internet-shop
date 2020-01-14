@@ -23,15 +23,9 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-
     public Bucket get(long bucketId) {
-        Bucket bucket = null;
-        try {
-            bucket = bucketDao.get(bucketId).get();
-        } catch (NoSuchElementException e) {
-            LOGGER.error("No such element in Storage");
-        }
-        return bucket;
+        LOGGER.error("Error occured when tried to update bucket");
+        return bucketDao.get(bucketId).orElseThrow(NoSuchElementException::new);
     }
 
     @Override

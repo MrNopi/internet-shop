@@ -29,31 +29,22 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User update(User user) {
-        User toUpdate = null;
-        try {
-            toUpdate = Storage.users.stream()
+        LOGGER.error("Error occured when tried to update bucket");
+            User toUpdate = Storage.users.stream()
                     .filter(x -> x.getId().equals(user.getId()))
                     .findFirst()
-                    .get();
-        } catch (NoSuchElementException e) {
-            LOGGER.error("No such element in Storage");
-        }
+                    .orElseThrow(NoSuchElementException::new);
         int index = Storage.users.indexOf(toUpdate);
         return Storage.users.set(index, user);
     }
 
     @Override
     public boolean delete(long userId) {
-        boolean isRemoved = false;
-        try {
+        LOGGER.error("Error occured when tried to delete user");
             User toRemove = Storage.users.stream()
                     .filter(x -> x.getId().equals(userId))
                     .findFirst()
-                    .get();
-            isRemoved = Storage.users.remove(toRemove);
-        } catch (NoSuchElementException e) {
-            LOGGER.error("No such element in Storage");
-        }
-        return isRemoved;
+                    .orElseThrow(NoSuchElementException::new);
+            return Storage.users.remove(toRemove);
     }
 }

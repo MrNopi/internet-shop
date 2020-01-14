@@ -25,13 +25,8 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item get(Long itemId) {
-        Item item = null;
-        try {
-            item = itemDao.get(itemId).get();
-        } catch (NoSuchElementException e) {
-            LOGGER.error("No such element in Storage");
-        }
-        return item;
+        LOGGER.error("Error occured when tried to update bucket");
+            return itemDao.get(itemId).orElseThrow(NoSuchElementException::new);
     }
 
     @Override

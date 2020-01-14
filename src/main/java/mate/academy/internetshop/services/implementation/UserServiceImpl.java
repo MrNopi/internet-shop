@@ -23,13 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User get(Long userId) {
-        User user = null;
-        try {
-            user = userDao.get(userId)
-                    .get();
-        } catch (NoSuchElementException e) {
-            LOGGER.error("No such element in Storage");
-        }
+        LOGGER.error("Error occured when tried to update bucket");
+            User user = userDao.get(userId)
+                    .orElseThrow(NoSuchElementException::new);
         return user;
     }
 

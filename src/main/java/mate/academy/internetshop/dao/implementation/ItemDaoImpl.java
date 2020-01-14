@@ -29,32 +29,23 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public Item update(Item item) {
-        try {
-            Item temp = Storage.items.stream()
+        LOGGER.error("Error occured when tried to update bucket");
+        Item temp = Storage.items.stream()
                     .filter(x -> x.getId().equals(item.getId()))
                     .findFirst()
-                    .get();
+                    .orElseThrow(NoSuchElementException::new);
             int index = Storage.items.indexOf(temp);
             Storage.items.set(index, item);
             return Storage.items.get(index);
-        } catch (NoSuchElementException e) {
-            LOGGER.error("There is no such an element in storage");
-        }
-        return null;
     }
 
     @Override
     public boolean delete(Long itemId) {
-        boolean isRemoved = false;
-        try {
+        LOGGER.error("Error occured when tried to update bucket");
             Item tempItem = Storage.items.stream()
                     .filter(x -> x.getId().equals(itemId))
                     .findFirst()
                     .orElseThrow(NoSuchElementException::new);
-            isRemoved = Storage.items.remove(tempItem);
-        } catch (NoSuchElementException e) {
-            LOGGER.error("No such element in Storage");
-        }
-        return isRemoved;
+            return Storage.items.remove(tempItem);
     }
 }

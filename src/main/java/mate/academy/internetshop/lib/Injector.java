@@ -18,10 +18,11 @@ public class Injector {
     private static final Logger LOGGER = Logger.getLogger(Injector.class);
 
     static {
+        LOGGER.error("Class not found");
         try {
             classes.addAll(getClasses(PROJECT_MAIN_PACKAGE));
         } catch (ClassNotFoundException | IOException e) {
-            LOGGER.error("Class not found");
+            throw new RuntimeException("Error while dependency injection occured ");
         }
     }
 

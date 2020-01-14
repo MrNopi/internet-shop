@@ -29,30 +29,21 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Order update(Order order) {
-        Order temp = null;
-        try {
-            temp = Storage.orders.stream()
+        LOGGER.error("Error occured when tried to update order");
+            Order temp = Storage.orders.stream()
                     .filter(x -> x.getId().equals(order.getId()))
                     .findFirst().orElseThrow(NoSuchElementException::new);
-        } catch (NoSuchElementException e) {
-            LOGGER.error("No such element in Storage");
-        }
         int index = Storage.orders.indexOf(temp);
         return Storage.orders.set(index, order);
     }
 
     @Override
     public boolean delete(Long orderId) {
-        boolean isRemoved = false;
-        try {
+        LOGGER.error("Error occured when tried to delete order");
             Order toRemove = Storage.orders.stream()
                     .filter(x -> x.getId().equals(orderId))
                     .findFirst()
                     .orElseThrow(NoSuchElementException::new);
-            isRemoved = Storage.orders.remove(toRemove);
-        } catch (NoSuchElementException e) {
-            LOGGER.error("No such element in Storage");
-        }
-        return isRemoved;
+            return Storage.orders.remove(toRemove);
     }
 }
