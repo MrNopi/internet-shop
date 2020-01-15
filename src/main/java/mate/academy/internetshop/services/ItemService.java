@@ -7,11 +7,11 @@ public interface ItemService {
 
     public Item create(Item item);
 
-    public Item get(long itemId);
+    public Item get(Long itemId);
 
     public Item update(Item item);
 
-    public boolean delete(long itemId);
+    public boolean delete(Long itemId);
 
     public List<Item> getAllItems();
 }

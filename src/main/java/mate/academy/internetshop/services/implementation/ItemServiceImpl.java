@@ -21,8 +21,8 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item get(long itemId) {
-        return itemDao.get(itemId).orElseThrow(NoSuchElementException::new);
+    public Item get(Long itemId) {
+            return itemDao.get(itemId).orElseThrow(NoSuchElementException::new);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public boolean delete(long itemId) {
+    public boolean delete(Long itemId) {
         return itemDao.delete(itemId);
     }
 

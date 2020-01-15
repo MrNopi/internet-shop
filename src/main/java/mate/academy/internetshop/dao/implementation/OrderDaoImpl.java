@@ -9,7 +9,6 @@ import mate.academy.internetshop.models.Order;
 
 @Dao
 public class OrderDaoImpl implements OrderDao {
-
     private static Long id = 0L;
 
     @Override
@@ -28,20 +27,19 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Order update(Order order) {
-        Order temp = Storage.orders.stream()
-                .filter(x -> x.getId().equals(order.getId()))
-                .findFirst().orElseThrow(NoSuchElementException::new);
+            Order temp = Storage.orders.stream()
+                    .filter(x -> x.getId().equals(order.getId()))
+                    .findFirst().orElseThrow(NoSuchElementException::new);
         int index = Storage.orders.indexOf(temp);
         return Storage.orders.set(index, order);
     }
 
     @Override
     public boolean delete(Long orderId) {
-        Order toRemove = Storage.orders.stream()
-                .filter(x -> x.getId().equals(orderId))
-                .findFirst()
-                .orElseThrow(NoSuchElementException::new);
-        Storage.orders.remove(toRemove);
-        return true;
+            Order toRemove = Storage.orders.stream()
+                    .filter(x -> x.getId().equals(orderId))
+                    .findFirst()
+                    .orElseThrow(NoSuchElementException::new);
+            return Storage.orders.remove(toRemove);
     }
 }

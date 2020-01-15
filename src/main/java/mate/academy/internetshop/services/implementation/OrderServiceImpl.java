@@ -24,7 +24,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Optional<Order> get(long orderId) {
+    public Optional<Order> get(Long orderId) {
         return orderDao.get(orderId);
     }
 
@@ -34,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean delete(long orderId) {
+    public boolean delete(Long orderId) {
         return orderDao.delete(orderId);
     }
 

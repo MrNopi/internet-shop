@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  * Students will implement this on Lesson 16 (Servlet)
@@ -19,7 +20,7 @@ public class Injector {
         try {
             classes.addAll(getClasses(PROJECT_MAIN_PACKAGE));
         } catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error while dependency injection occured ");
         }
     }
 

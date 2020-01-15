@@ -10,11 +10,11 @@ public interface OrderService {
 
     public Order create(Order order);
 
-    public Optional<Order> get(long orderId);
+    public Optional<Order> get(Long orderId);
 
     public Order update(Order order);
 
-    public boolean delete(long orderId);
+    public boolean delete(Long orderId);
 
     public Order completeOrder(List<Item> items, User user);
 

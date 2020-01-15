@@ -20,8 +20,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User get(long userId) {
-        return userDao.get(userId).orElseThrow(NoSuchElementException::new);
+    public User get(Long userId) {
+            User user = userDao.get(userId)
+                    .orElseThrow(NoSuchElementException::new);
+        return user;
     }
 
     @Override
@@ -30,7 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean delete(long userId) {
+    public boolean delete(Long userId) {
         return userDao.delete(userId);
     }
 
