@@ -15,10 +15,8 @@ import org.apache.log4j.Logger;
 public class Injector {
     private static final String PROJECT_MAIN_PACKAGE = "mate.academy.internetshop";
     private static List<Class> classes = new ArrayList<>();
-    private static final Logger LOGGER = Logger.getLogger(Injector.class);
 
     static {
-        LOGGER.error("Class not found");
         try {
             classes.addAll(getClasses(PROJECT_MAIN_PACKAGE));
         } catch (ClassNotFoundException | IOException e) {
