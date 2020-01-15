@@ -1,7 +1,6 @@
 package mate.academy.internetshop.services.implementation;
 
 import java.util.List;
-import javax.security.sasl.AuthenticationException;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -25,8 +24,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User get(Long userId) {
-            User user = userDao.get(userId)
-                    .orElseThrow(NoSuchElementException::new);
+        User user = userDao.get(userId)
+                .orElseThrow(NoSuchElementException::new);
         return user;
     }
 

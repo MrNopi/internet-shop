@@ -6,8 +6,6 @@ import java.util.Optional;
 import mate.academy.internetshop.exception.AuthorisationException;
 import mate.academy.internetshop.models.User;
 
-import javax.security.sasl.AuthenticationException;
-
 public interface UserService {
 
     public User create(User user);
@@ -21,7 +19,7 @@ public interface UserService {
     public List<User> getAllUsers();
 
     public User login(String login, String password)
-            throws AuthenticationException, AuthorisationException;
+            throws AuthorisationException;
 
     Optional<User> findByToken(String token);
 }

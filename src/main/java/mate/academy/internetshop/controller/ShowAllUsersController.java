@@ -1,16 +1,11 @@
 package mate.academy.internetshop.controller;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Optional;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import mate.academy.internetshop.lib.Inject;
-import mate.academy.internetshop.models.User;
 import mate.academy.internetshop.services.UserService;
 
 public class ShowAllUsersController extends HttpServlet {
@@ -20,11 +15,7 @@ public class ShowAllUsersController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
         req.setAttribute("users", userService.getAllUsers());
         req.getRequestDispatcher("/WEB-INF/views/showAllUsers.jsp").forward(req, resp);
-        //req.setAttribute("errorMsg", "you need to pass authentication to proceed to this page");
-        //req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
-
     }
 }

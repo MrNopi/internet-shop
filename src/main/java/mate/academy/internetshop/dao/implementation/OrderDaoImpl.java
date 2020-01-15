@@ -2,6 +2,7 @@ package mate.academy.internetshop.dao.implementation;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
+
 import mate.academy.internetshop.dao.OrderDao;
 import mate.academy.internetshop.db.Storage;
 import mate.academy.internetshop.lib.Dao;
@@ -27,19 +28,19 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Order update(Order order) {
-            Order temp = Storage.orders.stream()
-                    .filter(x -> x.getId().equals(order.getId()))
-                    .findFirst().orElseThrow(NoSuchElementException::new);
+        Order temp = Storage.orders.stream()
+                .filter(x -> x.getId().equals(order.getId()))
+                .findFirst().orElseThrow(NoSuchElementException::new);
         int index = Storage.orders.indexOf(temp);
         return Storage.orders.set(index, order);
     }
 
     @Override
     public boolean delete(Long orderId) {
-            Order toRemove = Storage.orders.stream()
-                    .filter(x -> x.getId().equals(orderId))
-                    .findFirst()
-                    .orElseThrow(NoSuchElementException::new);
-            return Storage.orders.remove(toRemove);
+        Order toRemove = Storage.orders.stream()
+                .filter(x -> x.getId().equals(orderId))
+                .findFirst()
+                .orElseThrow(NoSuchElementException::new);
+        return Storage.orders.remove(toRemove);
     }
 }

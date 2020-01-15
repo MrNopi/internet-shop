@@ -2,6 +2,7 @@ package mate.academy.internetshop.dao.implementation;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
+
 import mate.academy.internetshop.dao.BucketDao;
 import mate.academy.internetshop.db.Storage;
 import mate.academy.internetshop.lib.Dao;
@@ -28,13 +29,13 @@ public class BucketDaoImpl implements BucketDao {
 
     @Override
     public Bucket update(Bucket bucket) {
-            Bucket buck = Storage.buckets
-                    .stream()
-                    .filter(x -> x.getId().equals(bucket.getId()))
-                    .findFirst()
-                    .orElseThrow(NoSuchElementException::new);
-            int index = Storage.buckets.indexOf(buck);
-            return Storage.buckets.set(index, bucket);
+        Bucket buck = Storage.buckets
+                .stream()
+                .filter(x -> x.getId().equals(bucket.getId()))
+                .findFirst()
+                .orElseThrow(NoSuchElementException::new);
+        int index = Storage.buckets.indexOf(buck);
+        return Storage.buckets.set(index, bucket);
     }
 
     @Override

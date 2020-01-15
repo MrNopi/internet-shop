@@ -1,18 +1,21 @@
 package mate.academy.internetshop.controller;
 
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import mate.academy.internetshop.exception.AuthorisationException;
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.models.User;
 import mate.academy.internetshop.services.UserService;
 
-import javax.security.sasl.AuthenticationException;
-import javax.servlet.ServletException;
-import javax.servlet.http.*;
-import java.io.IOException;
-
 public class LoginController extends HttpServlet {
     @Inject
     private static UserService userService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -35,8 +38,5 @@ public class LoginController extends HttpServlet {
             req.setAttribute("errorMsg", "Incorrect username or password");
             req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
         }
-
-
-
     }
 }

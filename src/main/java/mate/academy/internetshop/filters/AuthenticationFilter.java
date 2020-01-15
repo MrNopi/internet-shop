@@ -1,16 +1,20 @@
 package mate.academy.internetshop.filters;
 
-import mate.academy.internetshop.lib.Inject;
-import mate.academy.internetshop.models.User;
-import mate.academy.internetshop.services.UserService;
-
-import javax.servlet.*;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Optional;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import mate.academy.internetshop.lib.Inject;
+import mate.academy.internetshop.models.User;
+import mate.academy.internetshop.services.UserService;
 
 public class AuthenticationFilter implements Filter {
     @Inject
@@ -18,14 +22,15 @@ public class AuthenticationFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest,
-                         ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest)servletRequest;
-        HttpServletResponse resp = (HttpServletResponse)servletResponse;
+                         ServletResponse servletResponse,
+                         FilterChain filterChain)
+            throws IOException, ServletException {
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
         Optional<Cookie> cookie = Arrays.stream(req.getCookies())
                 .filter(x -> x.getName().equals("token"))
@@ -36,7 +41,7 @@ public class AuthenticationFilter implements Filter {
                 filterChain.doFilter(servletRequest, servletResponse);
             }
         }
-        resp.sendRedirect(req.getContextPath() +"/login");
+        resp.sendRedirect(req.getContextPath() + "/login");
     }
 
     @Override
