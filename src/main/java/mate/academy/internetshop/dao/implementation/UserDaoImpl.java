@@ -13,6 +13,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User create(User user) {
+        user.setToken();
         user.setId(++id);
         Storage.users.add(user);
         return user;
@@ -42,5 +43,19 @@ public class UserDaoImpl implements UserDao {
                     .findFirst()
                     .orElseThrow(NoSuchElementException::new);
             return Storage.users.remove(toRemove);
+    }
+
+    @Override
+    public Optional<User> getUserByLogin(String login) {
+        return Storage.users.stream()
+                .filter(x -> x.getLogin().equals(login))
+                .findFirst();
+    }
+
+    @Override
+    public Optional<User> findByToken(String token) {
+        return Storage.users.stream()
+                .filter(x -> x.getToken().equals(token))
+                .findFirst();
     }
 }

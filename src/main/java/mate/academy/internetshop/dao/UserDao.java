@@ -12,4 +12,8 @@ public interface UserDao {
     User update(User user);
 
     boolean delete(long userId);
+
+    Optional<User> getUserByLogin(String login);
+
+    Optional<User> findByToken(String token);
 }

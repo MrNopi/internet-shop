@@ -16,7 +16,7 @@
     <c:forEach var="user" items="${users}">
         <tr>
             <th><c:out value="${user.getId()}"/></th>
-            <th><c:out value="${user.getName()}"/></th>
+            <th><c:out value="${user.getLogin()}"/></th>
         </tr>
     </c:forEach>
 </table>

@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.models.User;
@@ -25,9 +26,11 @@ public class RegistrationController extends HttpServlet {
     protected void doPost(HttpServletRequest req,
                           HttpServletResponse resp)
             throws ServletException, IOException {
+
         User newUser = new User(req.getParameter("name"));
-        newUser.setSurname(req.getParameter("surname"));
         newUser.setPassword(req.getParameter("password"));
+        HttpSession session = req.getSession(true);
+        session.setAttribute("userId", newUser.getId());
         userService.create(newUser);
         resp.sendRedirect(req.getContextPath() + "/index");
     }

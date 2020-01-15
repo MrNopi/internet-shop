@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: MrNopi
-  Date: 11.01.2020
-  Time: 20:09
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -26,8 +19,10 @@
         <input type="password" id="password-repeat">
 
     <button type="submit" name="subBtn">Register</button>
-
     </form>
+</div>
+<div>
+    <a href="${pageContext.request.contextPath}/login">Already have an account? Sign in!</a>
 </div>
 </body>
 </html>
