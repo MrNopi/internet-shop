@@ -21,7 +21,7 @@
 </div>
 <div>
     <h1>Item Adding</h1>
-    <form action="${pageContext.request.contextPath}/Servlet/createItem" method="post">
+    <form action="${pageContext.request.contextPath}/createItem" method="post">
         <input type="text" name="itemName">
         <input type="text" name="itemPrice">
         <button type="submit">Create Item</button>

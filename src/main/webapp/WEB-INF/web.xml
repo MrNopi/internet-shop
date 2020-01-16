@@ -33,7 +33,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>createItem</servlet-name>
-        <url-pattern>/Servlet/createItem</url-pattern>
+        <url-pattern>/createItem</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>showAllItems</servlet-name>
@@ -90,6 +90,22 @@
     <servlet-mapping>
         <servlet-name>ShowBucketItems</servlet-name>
         <url-pattern>/Servlet/ShowBucketItems</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CompleteOrder</servlet-name>
+        <servlet-class>mate.academy.internetshop.controller.CompleteOrderController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CompleteOrder</servlet-name>
+        <url-pattern>/Servlet/CompleteOrder</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>RemoveOrder</servlet-name>
+        <servlet-class>mate.academy.internetshop.controller.RemoveOrderController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoveOrder</servlet-name>
+        <url-pattern>/Servlet/RemoveOrder</url-pattern>
     </servlet-mapping>
     <filter>
         <filter-name>auth-filter</filter-name>

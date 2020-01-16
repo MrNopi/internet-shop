@@ -12,13 +12,13 @@ import mate.academy.internetshop.services.OrderService;
 public class ShowAllOrdersController extends HttpServlet {
     @Inject
     private static OrderService orderService;
-    private static final Long USER_ID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest req,
                          HttpServletResponse resp)
             throws ServletException, IOException {
-        req.setAttribute("orders", orderService.getUserOrders(USER_ID));
-        req.getRequestDispatcher("WEB-INF/views/ShowAllOrdersController").forward(req, resp);
+        Long userId = (Long)req.getSession().getAttribute("userId");
+        req.setAttribute("orders", orderService.getUserOrders(userId));
+        req.getRequestDispatcher("/WEB-INF/views/ShowAllOrdersController").forward(req, resp);
     }
 }
