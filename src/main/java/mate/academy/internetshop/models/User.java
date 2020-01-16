@@ -1,13 +1,24 @@
 package mate.academy.internetshop.models;
 
+import java.util.UUID;
+
 public class User {
     private Long id;
-    private String name;
+    private String login;
     private String surname;
     private String password;
+    private UUID token;
 
-    public User(String name) {
-        this.name = name;
+    public String getToken() {
+        return token.toString();
+    }
+
+    public void setToken() {
+        token = UUID.nameUUIDFromBytes((login + password).getBytes());
+    }
+
+    public User(String login) {
+        this.login = login;
     }
 
     public Long getId() {
@@ -18,12 +29,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getLogin() {
+        return login;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getSurname() {

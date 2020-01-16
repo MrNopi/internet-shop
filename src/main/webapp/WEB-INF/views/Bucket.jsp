@@ -1,17 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="bucket" scope="request" type="java.util.List"/>
 <jsp:useBean id="user" scope="request" type="mate.academy.internetshop.models.User"/>
-<%--
-  Created by IntelliJ IDEA.
-  User: MrNopi
-  Date: 12.01.2020
-  Time: 17:30
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Bucket for ${user.name}</title>
+    <title>Bucket for ${user.login}</title>
 </head>
 <body>
 <table border="1">
@@ -19,7 +12,7 @@
     <tr>
         <th><c:out value="${item.getName()}"/></th>
         <th><c:out value="${item.getPrice()}"/></th>
-        <th><a href="${pageContext.request.contextPath}/deleteFromBucket?item=${item.getId()}">
+        <th><a href="${pageContext.request.contextPath}/Servlet/deleteFromBucket?item=${item.getId()}">
             Remove From Bucket
         </a></th>
     </tr>

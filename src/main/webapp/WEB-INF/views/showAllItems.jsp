@@ -19,7 +19,7 @@
     <tr>
         <th><c:out value="${item.getName()}"/></th>
         <th><c:out value="${item.getPrice()}"/></th>
-        <th><a href="${pageContext.request.contextPath}/addToBucket?item=${item.getId()}">
+        <th><a href="${pageContext.request.contextPath}/Servlet/addToBucket?item=${item.getId()}">
             Add to bucket
         </a></th>
         <th><a href="${pageContext.request.contextPath}/deleteItem?item=${item.getId()}">
