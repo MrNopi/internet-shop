@@ -8,12 +8,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import mate.academy.internetshop.lib.Inject;
+import mate.academy.internetshop.models.Bucket;
 import mate.academy.internetshop.models.User;
+import mate.academy.internetshop.services.BucketService;
 import mate.academy.internetshop.services.UserService;
 
 public class RegistrationController extends HttpServlet {
     @Inject
     private static UserService userService;
+    @Inject
+    private static BucketService bucketService;
 
     @Override
     protected void doGet(HttpServletRequest req,
@@ -28,9 +32,11 @@ public class RegistrationController extends HttpServlet {
             throws ServletException, IOException {
         User newUser = new User(req.getParameter("name"));
         newUser.setPassword(req.getParameter("password"));
+        userService.create(newUser);
+        bucketService.create(new Bucket(newUser));
+
         HttpSession session = req.getSession(true);
         session.setAttribute("userId", newUser.getId());
-        userService.create(newUser);
-        resp.sendRedirect(req.getContextPath() + "/index");
+        resp.sendRedirect(req.getContextPath() + "/login");
     }
 }

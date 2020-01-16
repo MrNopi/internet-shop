@@ -38,10 +38,14 @@ public class AuthenticationFilter implements Filter {
         if (cookie.isPresent()) {
             Optional<User> user = userService.findByToken(cookie.get().getValue());
             if (user.isPresent()) {
+                //req.getSession().setAttribute("userId", user.get().getId());
                 filterChain.doFilter(servletRequest, servletResponse);
+                return;
+            } else {
+                resp.sendRedirect(req.getContextPath() + "/login");
             }
         }
-        resp.sendRedirect(req.getContextPath() + "/login");
+
     }
 
     @Override
