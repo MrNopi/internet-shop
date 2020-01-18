@@ -17,9 +17,11 @@
         <tr>
             <th><c:out value="${user.getId()}"/></th>
             <th><c:out value="${user.getLogin()}"/></th>
+            <th><a href="${pageContext.request.contextPath}/Servlet/deleteUser?userId=${user.getId()}">Delete</a></th>
         </tr>
+
     </c:forEach>
 </table>
-<a href="${pageContext.request.contextPath}/index">Back to the main</a>
+<a href="${pageContext.request.contextPath}/Servlet/index">Back to the main</a>
 </body>
 </html>

@@ -16,8 +16,9 @@
         <input type="password" id="password" name="password">
 
         <button type="submit" name="subBtn">Login</button>
-
     </form>
+    <p>Don't have an account,<a href="${pageContext.request.contextPath}/registration"> Sign Up</a></p>
 </div>
+<a href="${pageContext.request.contextPath}/index">Back to main menu</a>
 </body>
 </html>

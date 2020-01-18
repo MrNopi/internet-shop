@@ -1,21 +1,21 @@
 package mate.academy.internetshop.filters;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Optional;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.Cookie;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Optional;
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.models.User;
 import mate.academy.internetshop.services.UserService;
 
+@WebFilter("/Servlet/*")
 public class AuthenticationFilter implements Filter {
     @Inject
     private static UserService userService;
@@ -31,21 +31,15 @@ public class AuthenticationFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
-
-        Optional<Cookie> cookie = Arrays.stream(req.getCookies())
-                .filter(x -> x.getName().equals("token"))
-                .findFirst();
-        if (cookie.isPresent()) {
-            Optional<User> user = userService.findByToken(cookie.get().getValue());
+        String token = (String) req.getSession(true).getAttribute("token");
+        if (token != null) {
+            Optional<User> user = userService.findByToken(token);
             if (user.isPresent()) {
-                //req.getSession().setAttribute("userId", user.get().getId());
                 filterChain.doFilter(servletRequest, servletResponse);
                 return;
-            } else {
-                resp.sendRedirect(req.getContextPath() + "/login");
             }
         }
-
+        resp.sendRedirect(req.getContextPath() + "/login");
     }
 
     @Override

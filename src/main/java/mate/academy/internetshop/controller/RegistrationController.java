@@ -1,7 +1,9 @@
 package mate.academy.internetshop.controller;
 
 import java.io.IOException;
+import java.util.Collections;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,10 +11,12 @@ import javax.servlet.http.HttpSession;
 
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.models.Bucket;
+import mate.academy.internetshop.models.Role;
 import mate.academy.internetshop.models.User;
 import mate.academy.internetshop.services.BucketService;
 import mate.academy.internetshop.services.UserService;
 
+@WebServlet(urlPatterns = "/registration")
 public class RegistrationController extends HttpServlet {
     @Inject
     private static UserService userService;
@@ -32,11 +36,9 @@ public class RegistrationController extends HttpServlet {
             throws ServletException, IOException {
         User newUser = new User(req.getParameter("name"));
         newUser.setPassword(req.getParameter("password"));
+        newUser.addRole(new Role("USER"));
         userService.create(newUser);
         bucketService.create(new Bucket(newUser));
-
-        HttpSession session = req.getSession(true);
-        session.setAttribute("userId", newUser.getId());
         resp.sendRedirect(req.getContextPath() + "/login");
     }
 }
