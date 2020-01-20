@@ -57,7 +57,6 @@ public class AuthorizationFilter implements Filter {
 
     @Override
     public void destroy() {
-
     }
 
     private void Authorized(User user, Role.roleName role, HttpServletRequest req,
