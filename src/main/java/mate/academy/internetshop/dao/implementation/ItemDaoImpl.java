@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -19,7 +21,7 @@ public class ItemDaoImpl implements ItemDao {
     private static Long id = 0L;
     @Inject
     private static Connection connection;
-    private static final String DB_NAME = "items";
+    private static final String DB_NAME = "shop";
     private static final Logger LOGGER = Logger.getLogger(ItemDaoImpl.class);
 
     @Override
@@ -73,5 +75,19 @@ public class ItemDaoImpl implements ItemDao {
             LOGGER.error("Unable to execute query at GET at class " + this.getClass(), e);
         }
         return false;
+    }
+
+    @Override
+    public List<Item> getAllItems() {
+        List<Item> items = new ArrayList<>();
+        try(Statement stmt = connection.createStatement()) {
+            ResultSet result = stmt.executeQuery("SELECT * FROM " + DB_NAME + ".items");
+            while(result.next()) {
+                items.add(new Item(result.getString("name")).setPrice(result.getDouble("price")).setId(result.getLong(1)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
     }
 }
