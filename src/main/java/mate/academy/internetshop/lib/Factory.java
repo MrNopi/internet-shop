@@ -54,7 +54,7 @@ public class Factory {
 
     public static ItemDaoImpl getItemDaoImpl() {
         if (itemDaoImpl == null) {
-            itemDaoImpl = new ItemDaoImpl();
+            itemDaoImpl = new ItemDaoImpl(getConnection());
         }
         return itemDaoImpl;
     }

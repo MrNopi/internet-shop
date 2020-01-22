@@ -6,23 +6,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import mate.academy.internetshop.dao.ItemDao;
-import mate.academy.internetshop.db.Storage;
 import mate.academy.internetshop.lib.Dao;
-import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.models.Item;
 import org.apache.log4j.Logger;
 
 @Dao
-public class ItemDaoImpl implements ItemDao {
+public class ItemDaoImpl extends AbstractDao<Item> implements ItemDao {
     private static Long id = 0L;
-    @Inject
-    private static Connection connection;
     private static final String DB_NAME = "shop";
     private static final Logger LOGGER = Logger.getLogger(ItemDaoImpl.class);
+
+    public ItemDaoImpl(Connection connection) {
+        super(connection);
+    }
 
     @Override
     public Item create(Item item) {
