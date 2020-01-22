@@ -20,7 +20,7 @@
 </table>
 <div>
 <a href="${pageContext.request.contextPath}/Servlet/CompleteOrder">Complete Order</a>
-<a href="${pageContext.request.contextPath}/index">Back to the main page</a>
+<a href="${pageContext.request.contextPath}/Servlet/index">Back to the main page</a>
 </div>
 </body>
 </html>

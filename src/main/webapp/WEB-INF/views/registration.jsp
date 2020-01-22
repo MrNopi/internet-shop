@@ -20,6 +20,7 @@
 
     <button type="submit" name="subBtn">Register</button>
     </form>
+    <a href="${pageContext.request.contextPath}/index">Back to main menu</a>
 </div>
 <div>
     <a href="${pageContext.request.contextPath}/login">Already have an account? Sign in!</a>

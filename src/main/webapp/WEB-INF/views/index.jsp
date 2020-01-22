@@ -10,18 +10,9 @@
 </head>
 <body>
 <a href="${pageContext.request.contextPath}/registration">Registration</a>
-
-<div>
-    <h1>User deleting</h1>
-    <form method="post" action="${pageContext.request.contextPath}/Servlet/delete">
-        <p3>Enter user id to remove</p3>
-        <input type="number" name="Id">
-        <button type="submit">Delete</button>
-    </form>
-</div>
 <div>
     <h1>Item Adding</h1>
-    <form action="${pageContext.request.contextPath}/createItem" method="post">
+    <form action="${pageContext.request.contextPath}/Servlet/createItem" method="post">
         <input type="text" name="itemName">
         <input type="text" name="itemPrice">
         <button type="submit">Create Item</button>

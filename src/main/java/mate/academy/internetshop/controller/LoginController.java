@@ -2,6 +2,7 @@ package mate.academy.internetshop.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.models.User;
 import mate.academy.internetshop.services.UserService;
 
+@WebServlet(urlPatterns = "/login")
 public class LoginController extends HttpServlet {
     @Inject
     private static UserService userService;
@@ -29,11 +31,9 @@ public class LoginController extends HttpServlet {
         String password = req.getParameter("password");
         try {
             User user = userService.login(login, password);
-            Cookie cookie = new Cookie("token", user.getToken());
-            resp.addCookie(cookie);
             HttpSession session = req.getSession(true);
-            session.setAttribute("userId", user.getId());
-            resp.sendRedirect(req.getContextPath() + "/index");
+            session.setAttribute("token", user.getToken());
+            resp.sendRedirect(req.getContextPath() + "/Servlet/index");
         } catch (AuthorisationException e) {
             req.setAttribute("errorMsg", "Incorrect username or password");
             req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
