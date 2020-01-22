@@ -1,5 +1,6 @@
 package mate.academy.internetshop.lib;
 
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 import mate.academy.internetshop.dao.BucketDao;
@@ -23,6 +24,7 @@ public class AnnotatedClassMap {
         classMap.put(BucketService.class, Factory.getBucketService());
         classMap.put(ItemService.class, Factory.getItemService());
         classMap.put(OrderService.class, Factory.getOrderService());
+        classMap.put(Connection.class, Factory.getConnection());
     }
 
     public static Object getImplementation(Class<?> interfaceClass) {

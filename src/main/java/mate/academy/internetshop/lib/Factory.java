@@ -1,5 +1,8 @@
 package mate.academy.internetshop.lib;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import mate.academy.internetshop.dao.implementation.BucketDaoImpl;
 import mate.academy.internetshop.dao.implementation.ItemDaoImpl;
 import mate.academy.internetshop.dao.implementation.OrderDaoImpl;
@@ -8,6 +11,7 @@ import mate.academy.internetshop.services.implementation.BucketServiceImpl;
 import mate.academy.internetshop.services.implementation.ItemServiceImpl;
 import mate.academy.internetshop.services.implementation.OrderServiceImpl;
 import mate.academy.internetshop.services.implementation.UserServiceImpl;
+import org.apache.log4j.Logger;
 
 public class Factory {
     private static UserDaoImpl userDaoImpl;
@@ -18,6 +22,21 @@ public class Factory {
     private static BucketServiceImpl bucketService;
     private static ItemServiceImpl itemService;
     private static OrderServiceImpl orderService;
+    private static Connection connection;
+    private static final Logger LOGGER = Logger.getLogger(Factory.class);
+    private static final String DB_NAME = "items";
+
+    public static Connection getConnection() {
+        if (connection == null) {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop?useUnicode=true&useJDBCCompliantTimezoneShift=true&serverTimezone=UTC", "root", "Smartlike1998");
+            } catch (ClassNotFoundException | SQLException e) {
+                LOGGER.error("Unable to connect to database, named " + DB_NAME, e);
+            }
+        }
+        return connection;
+    }
 
     public static UserDaoImpl getUserDaoImpl() {
         if (userDaoImpl == null) {
