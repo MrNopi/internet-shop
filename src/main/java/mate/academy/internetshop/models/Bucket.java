@@ -39,10 +39,6 @@ public class Bucket {
         this.items = items;
     }
 
-    public List<Item> getAllItems() {
-        return items;
-    }
-
     @Override
     public String toString() {
         return "Bucket{"

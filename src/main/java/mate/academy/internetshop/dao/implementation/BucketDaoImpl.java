@@ -10,24 +10,23 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import mate.academy.internetshop.dao.BucketDao;
+import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Dao;
 import mate.academy.internetshop.models.Bucket;
 import mate.academy.internetshop.models.Item;
-import org.apache.log4j.Logger;
 
 @Dao
 public class BucketDaoImpl extends AbstractDao<Bucket> implements BucketDao {
     private static final String BUCKETS_TABLE = "buckets";
     private static final String ITEMS_TABLE = "items";
     private static final String BUCKET_ITEMS_TABLE = "bucket_items";
-    private static final Logger LOGGER = Logger.getLogger(BucketDaoImpl.class);
 
     public BucketDaoImpl(Connection connection) {
         super(connection);
     }
 
     @Override
-    public Bucket create(Bucket bucket) {
+    public Bucket create(Bucket bucket) throws DataProcessingException {
         String query = String.format("INSERT INTO %s(user_id) VALUES(?)", BUCKETS_TABLE);
         try (PreparedStatement stmt = connection.prepareStatement(query,
                 Statement.RETURN_GENERATED_KEYS)) {
@@ -37,7 +36,7 @@ public class BucketDaoImpl extends AbstractDao<Bucket> implements BucketDao {
             rs.next();
             bucket.setId(rs.getLong(1));
         } catch (SQLException e) {
-            LOGGER.error("Unable to create bucket cuz of error: ", e);
+            throw new DataProcessingException("Unable to create new Bucket", e);
         }
         return bucket;
     }
@@ -72,23 +71,23 @@ public class BucketDaoImpl extends AbstractDao<Bucket> implements BucketDao {
     }
 
     @Override
-    public Bucket update(Bucket bucket) {
+    public Bucket update(Bucket bucket) throws DataProcessingException {
         String query = String.format("UPDATE %s SET(item_id=?)", BUCKET_ITEMS_TABLE);
         try (PreparedStatement stmt = connection.prepareStatement(query,
                 Statement.RETURN_GENERATED_KEYS)) {
-            for (Item item : bucket.getAllItems()) {
+            for (Item item : bucket.getItems()) {
                 stmt.setLong(1, item.getId());
                 stmt.executeUpdate();
             }
             bucket = get(bucket.getId()).orElseThrow(NoSuchElementException::new);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataProcessingException("Unable to update bucket ", e);
         }
         return bucket;
     }
 
     @Override
-    public boolean delete(Long bucketId) {
+    public boolean delete(Long bucketId) throws DataProcessingException {
         clear(bucketId);
         String query = String.format("DELETE FROM %s WHERE bucket_id=?;", BUCKETS_TABLE);
         try (PreparedStatement stmt = connection.prepareStatement(query,
@@ -97,12 +96,11 @@ public class BucketDaoImpl extends AbstractDao<Bucket> implements BucketDao {
             stmt.setLong(1, bucketId);
             return stmt.execute();
         } catch (SQLException e) {
-            LOGGER.error("Cannot perform remove for current bucket, cuz of: ", e);
+            throw new DataProcessingException("Cannot perform remove for current bucket, cuz of: ", e);
         }
-        return false;
     }
 
-    public boolean clear(Long bucketId) {
+    public boolean clear(Long bucketId) throws DataProcessingException {
         String query = String.format("DELETE FROM %s WHERE bucket_id=?;\n", BUCKET_ITEMS_TABLE);
         try (PreparedStatement stmt = connection.prepareStatement(query,
                 Statement.RETURN_GENERATED_KEYS)) {
@@ -110,8 +108,7 @@ public class BucketDaoImpl extends AbstractDao<Bucket> implements BucketDao {
             stmt.setLong(1, bucketId);
             return stmt.execute();
         } catch (SQLException e) {
-            LOGGER.error("Can't clean current bucket, cuz of: ", e);
+            throw new DataProcessingException("Can't clean current bucket, cuz of: ", e);
         }
-        return false;
     }
 }
