@@ -12,6 +12,7 @@ import mate.academy.internetshop.models.Bucket;
 import mate.academy.internetshop.models.User;
 import mate.academy.internetshop.services.BucketService;
 import mate.academy.internetshop.services.UserService;
+import org.apache.log4j.Logger;
 
 @WebServlet(urlPatterns = "/Servlet/ShowBucketItems")
 public class ShowBucketItemsController extends HttpServlet {
@@ -19,6 +20,7 @@ public class ShowBucketItemsController extends HttpServlet {
     private static UserService userService;
     @Inject
     private static BucketService bucketService;
+    private static final Logger LOGGER = Logger.getLogger(ShowBucketItemsController.class);
 
     @Override
     protected void doGet(HttpServletRequest req,
@@ -30,6 +32,7 @@ public class ShowBucketItemsController extends HttpServlet {
             user = userService.get(userId);
         } catch (DataProcessingException e) {
             req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
+            LOGGER.error(e);
         }
         Bucket bucket = bucketService.get(userId);
         req.setAttribute("user", user);

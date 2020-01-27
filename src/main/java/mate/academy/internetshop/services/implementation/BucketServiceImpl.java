@@ -36,8 +36,8 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public void addItem(Bucket bucket, Item item) {
-        bucket.items.add(item);
+    public boolean addItem(Bucket bucket, Item item) throws DataProcessingException {
+        return bucketDao.addItemInBucket(item, bucket.getId());
     }
 
     @Override

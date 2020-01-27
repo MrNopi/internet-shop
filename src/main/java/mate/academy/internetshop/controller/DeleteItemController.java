@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.services.ItemService;
+import org.apache.log4j.Logger;
 
 @WebServlet(urlPatterns = "/Servlet/deleteItem")
 public class DeleteItemController extends HttpServlet {
     @Inject
     private static ItemService itemService;
+    private static final Logger LOGGER = Logger.getLogger(DeleteItemController.class);
 
     @Override
     protected void doGet(HttpServletRequest req,
@@ -25,6 +27,7 @@ public class DeleteItemController extends HttpServlet {
             itemService.delete(id);
         } catch (DataProcessingException e) {
             req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
+            LOGGER.error(e);
         }
         resp.sendRedirect(req.getContextPath() + "/Servlet/index");
     }

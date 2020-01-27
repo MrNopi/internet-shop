@@ -13,6 +13,7 @@ import mate.academy.internetshop.models.Bucket;
 import mate.academy.internetshop.models.Item;
 import mate.academy.internetshop.services.BucketService;
 import mate.academy.internetshop.services.ItemService;
+import org.apache.log4j.Logger;
 
 @WebServlet(urlPatterns = "/Servlet/deleteFromBucket")
 public class DeleteFromBucketController extends HttpServlet {
@@ -20,7 +21,7 @@ public class DeleteFromBucketController extends HttpServlet {
     private static BucketService bucketService;
     @Inject
     private static ItemService itemService;
-
+    private static final Logger LOGGER = Logger.getLogger(DeleteFromBucketController.class);
     @Override
     protected void doGet(HttpServletRequest req,
                          HttpServletResponse resp)
@@ -33,6 +34,7 @@ public class DeleteFromBucketController extends HttpServlet {
             item = itemService.get(itemId);
         } catch (DataProcessingException e) {
             req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
+            LOGGER.error(e);
         }
         bucketService.deleteItem(bucket, item);
         resp.sendRedirect(req.getContextPath() + "/Servlet/index");

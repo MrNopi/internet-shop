@@ -46,7 +46,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public Optional<User> get(Long userId) throws DataProcessingException {
-        User user = null;
+        User user;
         String query = String.format("SELECT %1$s.user_id, login, password, token, role FROM %1$s"
                 + " INNER JOIN %2$s ON %1$s.user_id = %2$s.user_id"
                 + " INNER JOIN roles ON %2$s.role_id = roles.role_id"
@@ -126,11 +126,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
             stmt.setString(1, token);
             ResultSet rs = stmt.executeQuery();
             rs.next();
-            user = new User(rs.getString("login"));
-            user.setPassword(rs.getString("password"));
-            user.setToken(rs.getString("token"));
-            user.addRole(new Role(rs.getString("role")));
-            user.setId(rs.getLong(1));
+            setUser(rs);
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to find user", e);
         }
@@ -146,11 +142,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         try (PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                User user = new User(rs.getString("name"));
-                user.setId(rs.getLong(1));
-                user.setPassword(rs.getString("password"));
-                user.addRole(new Role(rs.getString("role")));
-                users.add(user);
+                users.add(setUser(rs));
             }
             return users;
         } catch (SQLException e) {
@@ -169,5 +161,13 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to create user", e);
         }
+    }
+    private User setUser(ResultSet rs) throws SQLException {
+        User user = new User(rs.getString("login"));
+        user.setPassword(rs.getString("password"));
+        user.setToken(rs.getString("token"));
+        user.addRole(new Role(rs.getString("role")));
+        user.setId(rs.getLong(1));
+        return user;
     }
 }

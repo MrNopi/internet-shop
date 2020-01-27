@@ -12,6 +12,7 @@ import mate.academy.internetshop.models.Bucket;
 import mate.academy.internetshop.models.User;
 import mate.academy.internetshop.services.BucketService;
 import mate.academy.internetshop.services.UserService;
+import org.apache.log4j.Logger;
 
 @WebServlet(urlPatterns = "/registration")
 public class RegistrationController extends HttpServlet {
@@ -19,6 +20,7 @@ public class RegistrationController extends HttpServlet {
     private static UserService userService;
     @Inject
     private static BucketService bucketService;
+    private static final Logger LOGGER = Logger.getLogger(RegistrationController.class);
 
     @Override
     protected void doGet(HttpServletRequest req,
@@ -38,6 +40,8 @@ public class RegistrationController extends HttpServlet {
             bucketService.create(new Bucket(newUser));
         } catch (DataProcessingException e) {
             req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
+            LOGGER.error(e);
+
         }
         resp.sendRedirect(req.getContextPath() + "/login");
     }

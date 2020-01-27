@@ -11,11 +11,13 @@ import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.models.Role;
 import mate.academy.internetshop.models.User;
 import mate.academy.internetshop.services.UserService;
+import org.apache.log4j.Logger;
 
 @WebServlet("/Inject")
 public class InjectDataController extends HttpServlet {
     @Inject
     private static UserService userService;
+    private static final Logger LOGGER = Logger.getLogger(InjectDataController.class);
 
     @Override
     protected void doGet(HttpServletRequest req,
@@ -28,6 +30,7 @@ public class InjectDataController extends HttpServlet {
             userService.create(adminUser);
         } catch (DataProcessingException e) {
             req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
+            LOGGER.error(e);
         }
 
         resp.sendRedirect(req.getContextPath() + "/registration");

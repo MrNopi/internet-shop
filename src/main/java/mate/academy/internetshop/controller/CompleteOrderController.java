@@ -11,6 +11,7 @@ import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.services.BucketService;
 import mate.academy.internetshop.services.OrderService;
 import mate.academy.internetshop.services.UserService;
+import org.apache.log4j.Logger;
 
 @WebServlet(urlPatterns = "/Servlet/CompleteOrder")
 public class CompleteOrderController extends HttpServlet {
@@ -21,6 +22,7 @@ public class CompleteOrderController extends HttpServlet {
     private static BucketService bucketService;
     @Inject
     private static UserService userService;
+    private static final Logger LOGGER = Logger.getLogger(CompleteOrderController.class);
 
     @Override
     protected void doGet(HttpServletRequest req,
@@ -32,6 +34,7 @@ public class CompleteOrderController extends HttpServlet {
                     userService.get(userId));
         } catch (DataProcessingException e) {
             req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
+            LOGGER.error(e);
         }
         req.setAttribute("orders", orderService.getUserOrders(userId));
         req.getRequestDispatcher("/WEB-INF/views/ShowAllOrders.jsp").forward(req, resp);

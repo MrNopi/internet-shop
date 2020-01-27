@@ -13,16 +13,19 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.models.Role;
 import mate.academy.internetshop.models.User;
 import mate.academy.internetshop.services.UserService;
+import org.apache.log4j.Logger;
 
 @WebFilter("/Servlet/*")
 public class AuthorizationFilter implements Filter {
     @Inject
     private static UserService userService;
     private Map<String, Role.RoleName> protectedUrls = new HashMap<>();
+    private static final Logger LOGGER = Logger.getLogger(AuthorizationFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -46,7 +49,14 @@ public class AuthorizationFilter implements Filter {
         Role.RoleName neededRole = protectedUrls.get(req.getServletPath());
         String token = (String)req.getSession(true).getAttribute("token");
         if (token != null) {
-            Optional<User> user = userService.findByToken(token);
+            Optional<User> user;
+            try {
+                user = userService.findByToken(token);
+            } catch (DataProcessingException e) {
+
+                req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
+                return;
+            }
             if (user.isPresent()) {
                 authorized(user.get(), neededRole, req, resp, filterChain);
                 return;

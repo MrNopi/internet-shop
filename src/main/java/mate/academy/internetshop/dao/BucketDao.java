@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.models.Bucket;
+import mate.academy.internetshop.models.Item;
 
 public interface BucketDao {
 
@@ -15,5 +16,7 @@ public interface BucketDao {
 
     boolean delete(Long bucketId) throws DataProcessingException;
 
-    public boolean clear(Long bucketId) throws DataProcessingException;
+    boolean clear(Long bucketId) throws DataProcessingException;
+
+    boolean addItemInBucket(Item item, Long bucketId) throws DataProcessingException;
 }

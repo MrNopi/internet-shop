@@ -40,10 +40,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order completeOrder(List<Item> items, User user) {
-        Order order = new Order(user.getId()).setItems(items);
-        Storage.orders.add(order);
-        return order;
+    public Order completeOrder(List<Item> items, User user) throws DataProcessingException {
+        return orderDao.completeOrder(items, user);
     }
 
     @Override

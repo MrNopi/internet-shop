@@ -17,7 +17,7 @@ public interface OrderService {
 
     public boolean delete(Long orderId) throws DataProcessingException;
 
-    public Order completeOrder(List<Item> items, User user);
+    public Order completeOrder(List<Item> items, User user) throws DataProcessingException;
 
     public List<Order> getUserOrders(Long userId);
 }
