@@ -7,11 +7,11 @@ public interface UserDao {
 
     User create(User user);
 
-    Optional<User> get(long userId);
+    Optional<User> get(Long userId);
 
     User update(User user);
 
-    boolean delete(long userId);
+    boolean delete(Long userId);
 
     Optional<User> getUserByLogin(String login);
 

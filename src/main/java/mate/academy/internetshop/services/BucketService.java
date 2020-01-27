@@ -18,7 +18,7 @@ public interface BucketService {
 
     public void deleteItem(Bucket bucket, Item item);
 
-    public void clear(Bucket bucket);
+    public boolean clear(Bucket bucket);
 
     public List<Item> getAllItems(Bucket bucket);
 }

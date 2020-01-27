@@ -45,8 +45,8 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public void clear(Bucket bucket) {
-        bucket.items.clear();
+    public boolean clear(Bucket bucket) {
+        return bucketDao.clear(bucket.getId());
     }
 
     @Override

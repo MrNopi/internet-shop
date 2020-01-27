@@ -8,8 +8,11 @@ public class Order {
     private Long userId;
     private List<Item> items = new ArrayList<>();
 
-    public Order(User user) {
-        this.userId = user.getId();
+    public Order(Long userId) {
+        this.userId = userId;
+    }
+
+    public Order() {
     }
 
     public Long getId() {
@@ -20,8 +23,8 @@ public class Order {
         return userId;
     }
 
-    public void setUser(User user) {
-        this.userId = user.getId();
+    public void setUser(Long userId) {
+        this.userId = userId;
     }
 
     public List<Item> getItems() {

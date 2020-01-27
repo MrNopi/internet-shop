@@ -8,9 +8,11 @@ public interface BucketDao {
 
     Bucket create(Bucket bucket);
 
-    Optional<Bucket> get(long bucketId);
+    Optional<Bucket> get(Long bucketId);
 
     Bucket update(Bucket bucket);
 
-    boolean delete(long bucketId);
+    boolean delete(Long bucketId);
+
+    public boolean clear(Long bucketId);
 }

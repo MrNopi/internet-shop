@@ -12,6 +12,9 @@ public class Bucket {
         this.userId = user.getId();
     }
 
+    public Bucket() {
+    }
+
     public Long getId() {
         return id;
     }

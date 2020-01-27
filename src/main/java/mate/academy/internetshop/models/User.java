@@ -7,7 +7,6 @@ import java.util.UUID;
 public class User {
     private Long id;
     private String login;
-    private String surname;
     private String password;
     private Set<Role> role = new HashSet<>();
     private UUID token;
@@ -21,7 +20,11 @@ public class User {
     }
 
     public User(String login) {
+        setToken();
         this.login = login;
+    }
+
+    public User() {
     }
 
     public String getToken() {
@@ -30,6 +33,10 @@ public class User {
 
     public void setToken() {
         token = UUID.nameUUIDFromBytes((login + password).getBytes());
+    }
+
+    public void setToken(String token) {
+        this.token = UUID.fromString(token);
     }
 
     public Long getId() {
@@ -46,14 +53,6 @@ public class User {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public String getPassword() {

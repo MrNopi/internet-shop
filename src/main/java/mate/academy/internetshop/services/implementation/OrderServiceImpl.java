@@ -40,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order completeOrder(List<Item> items, User user) {
-        Order order = new Order(user).setItems(items);
+        Order order = new Order(user.getId()).setItems(items);
         Storage.orders.add(order);
         return order;
     }
