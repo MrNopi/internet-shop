@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.services.OrderService;
 
@@ -19,7 +20,11 @@ public class RemoveOrderController extends HttpServlet {
                          HttpServletResponse resp)
             throws ServletException, IOException {
         Long orderId = Long.valueOf(req.getParameter("orderId"));
-        orderService.delete(orderId);
+        try {
+            orderService.delete(orderId);
+        } catch (DataProcessingException e) {
+            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
+        }
         resp.sendRedirect(req.getContextPath() + "/Servlet/index");
     }
 }

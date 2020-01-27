@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.models.Role;
 import mate.academy.internetshop.models.User;
@@ -23,7 +24,11 @@ public class InjectDataController extends HttpServlet {
         adminUser.setLogin("admin");
         adminUser.setPassword("1");
         adminUser.addRole(new Role("ADMIN"));
-        userService.create(adminUser);
+        try {
+            userService.create(adminUser);
+        } catch (DataProcessingException e) {
+            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
+        }
 
         resp.sendRedirect(req.getContextPath() + "/registration");
     }

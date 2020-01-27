@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.services.ItemService;
 
@@ -20,7 +21,11 @@ public class DeleteItemController extends HttpServlet {
                          HttpServletResponse resp)
             throws ServletException, IOException {
         Long id = Long.valueOf(req.getParameter("itemId"));
-        itemService.delete(id);
+        try {
+            itemService.delete(id);
+        } catch (DataProcessingException e) {
+            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
+        }
         resp.sendRedirect(req.getContextPath() + "/Servlet/index");
     }
 }

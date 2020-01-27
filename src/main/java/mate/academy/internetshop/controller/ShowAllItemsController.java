@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.services.ItemService;
 
@@ -19,7 +20,11 @@ public class ShowAllItemsController extends HttpServlet {
     protected void doGet(HttpServletRequest req,
                          HttpServletResponse resp)
             throws ServletException, IOException {
-        req.setAttribute("items", itemService.getAllItems());
+        try {
+            req.setAttribute("items", itemService.getAllItems());
+        } catch (DataProcessingException e) {
+            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
+        }
         req.getRequestDispatcher("/WEB-INF/views/showAllItems.jsp").forward(req, resp);
     }
 }

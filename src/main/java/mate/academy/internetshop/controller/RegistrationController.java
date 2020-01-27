@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.models.Bucket;
 import mate.academy.internetshop.models.User;
@@ -32,8 +33,12 @@ public class RegistrationController extends HttpServlet {
             throws ServletException, IOException {
         User newUser = new User(req.getParameter("name"));
         newUser.setPassword(req.getParameter("password"));
-        userService.create(newUser);
-        bucketService.create(new Bucket(newUser));
+        try {
+            userService.create(newUser);
+            bucketService.create(new Bucket(newUser));
+        } catch (DataProcessingException e) {
+            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
+        }
         resp.sendRedirect(req.getContextPath() + "/login");
     }
 }

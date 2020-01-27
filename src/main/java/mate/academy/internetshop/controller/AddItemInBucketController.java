@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.models.Bucket;
 import mate.academy.internetshop.services.BucketService;
@@ -25,7 +26,11 @@ public class AddItemInBucketController extends HttpServlet {
         Long userId = (Long)req.getSession().getAttribute("userId");
         Long itemId = Long.valueOf(req.getParameter("itemId"));
         Bucket bucket = bucketService.get(userId);
-        bucketService.addItem(bucket, itemService.get(itemId));
+        try {
+            bucketService.addItem(bucket, itemService.get(itemId));
+        } catch (DataProcessingException e) {
+            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
+        }
         resp.sendRedirect(req.getContextPath() + "/Servlet/ShowBucketItems");
     }
 }

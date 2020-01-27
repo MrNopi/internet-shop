@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.models.Item;
 import mate.academy.internetshop.services.ItemService;
@@ -23,7 +24,11 @@ public class CreateItemController extends HttpServlet {
         String itemName = req.getParameter("itemName");
         Double itemPrice = Double.valueOf(req.getParameter("itemPrice"));
         Item newItem = new Item(itemName).setPrice(itemPrice);
-        itemService.create(newItem);
+        try {
+            itemService.create(newItem);
+        } catch (DataProcessingException e) {
+            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
+        }
         resp.sendRedirect(req.getContextPath() + "/Servlet/index");
     }
 }
