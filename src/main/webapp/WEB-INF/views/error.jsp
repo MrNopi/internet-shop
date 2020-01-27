@@ -12,7 +12,7 @@
 
 </head>
 <body>
-    <h1>Something went wrong, check data you passed and try again</h1>
+    <h1>${Msg}}</h1>
     <a href="${pageContext.request.contextPath}/Servlet/index">Back to main menu</a>
 </body>
 </html>

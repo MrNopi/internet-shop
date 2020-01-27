@@ -29,8 +29,9 @@ public class CreateItemController extends HttpServlet {
         try {
             itemService.create(newItem);
         } catch (DataProcessingException e) {
-            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
             LOGGER.error(e);
+            req.setAttribute("Msg", e);
+            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
         }
         resp.sendRedirect(req.getContextPath() + "/Servlet/index");
     }

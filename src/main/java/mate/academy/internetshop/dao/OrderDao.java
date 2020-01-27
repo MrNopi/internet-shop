@@ -17,5 +17,5 @@ public interface OrderDao {
 
     boolean delete(Long orderId) throws DataProcessingException;
 
-    public Order completeOrder(List<Item> items, User user) throws DataProcessingException;
+    Order completeOrder(List<Item> items, User user) throws DataProcessingException;
 }

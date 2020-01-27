@@ -13,6 +13,7 @@ import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.models.User;
 import mate.academy.internetshop.services.BucketService;
 import mate.academy.internetshop.services.UserService;
+import org.apache.log4j.Logger;
 
 @WebServlet(urlPatterns = "/login")
 public class LoginController extends HttpServlet {
@@ -20,6 +21,7 @@ public class LoginController extends HttpServlet {
     private static UserService userService;
     @Inject
     private static BucketService bucketService;
+    private static final Logger LOGGER = Logger.getLogger(LoginController.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -37,6 +39,8 @@ public class LoginController extends HttpServlet {
             try {
                 user = userService.login(login, password);
             } catch (DataProcessingException e) {
+                req.setAttribute("Msg", e);
+                LOGGER.error(e);
                 req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
             }
             HttpSession session = req.getSession(true);

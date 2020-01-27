@@ -65,7 +65,8 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
             }
             order.setItems(items);
         } catch (SQLException e) {
-            throw new DataProcessingException("Cannot get an appropriate order by id " + orderId, e);
+            throw new DataProcessingException("Cannot get an appropriate order by id "
+                    + orderId, e);
         }
         return Optional.of(order);
     }
@@ -102,7 +103,8 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
     }
 
     @Override
-    public Order completeOrder(List<Item> items, User user) throws DataProcessingException {
+    public Order completeOrder(List<Item> items, User user)
+            throws DataProcessingException {
         String query = String.format("INSERT INTO %s(user_id) VALUES(?)", ORDERS_TABLE);
         try (PreparedStatement stmt = connection.prepareStatement(query,
                 Statement.RETURN_GENERATED_KEYS)) {
@@ -117,8 +119,10 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
         }
     }
 
-    private Order addAllItems(List<Item> items, Long orderId) throws DataProcessingException {
-        String query = String.format("INSERT INTO %s(order_id, item_id) VALUES(?,?)", ORDERS_ITEMS_TABLE);
+    private Order addAllItems(List<Item> items, Long orderId)
+            throws DataProcessingException {
+        String query = String.format("INSERT INTO %s(order_id, item_id) VALUES(?,?)",
+                ORDERS_ITEMS_TABLE);
         try (PreparedStatement stmt = connection.prepareStatement(query,
                 Statement.RETURN_GENERATED_KEYS)) {
             Order order = new Order();

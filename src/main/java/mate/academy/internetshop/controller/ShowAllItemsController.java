@@ -25,8 +25,9 @@ public class ShowAllItemsController extends HttpServlet {
         try {
             req.setAttribute("items", itemService.getAllItems());
         } catch (DataProcessingException e) {
-            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
             LOGGER.error(e);
+            req.setAttribute("Msg", e);
+            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
         }
         req.getRequestDispatcher("/WEB-INF/views/showAllItems.jsp").forward(req, resp);
     }

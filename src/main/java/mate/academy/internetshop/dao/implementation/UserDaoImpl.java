@@ -56,11 +56,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
             stmt.setLong(1, userId);
             ResultSet rs = stmt.executeQuery();
             rs.next();
-            user = new User(rs.getString("login"));
-            user.setPassword(rs.getString("password"));
-            user.setToken(rs.getString("token"));
-            user.addRole(new Role(rs.getString("role")));
-            user.setId(userId);
+            user = setUser(rs);
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to get user", e);
         }
@@ -126,7 +122,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
             stmt.setString(1, token);
             ResultSet rs = stmt.executeQuery();
             rs.next();
-            setUser(rs);
+            user = setUser(rs);
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to find user", e);
         }
@@ -138,8 +134,10 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         List<User> users = new ArrayList<>();
         String query = String.format("SELECT %1$s.user_id, login, password, role FROM shop.%1$s\n"
                 + "INNER JOIN shop.%2$s ON %1$s.user_id = %2$s.user_id\n"
-                + "INNER JOIN shop.%3$s ON %2$s.role_id = %3$s.role_id;", USER_TABLE, USER_ROLE_TABLE, ROLE_TABLE);
-        try (PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+                + "INNER JOIN shop.%3$s ON %2$s.role_id = %3$s.role_id;",
+                USER_TABLE, USER_ROLE_TABLE, ROLE_TABLE);
+        try (PreparedStatement stmt = connection.prepareStatement(query,
+                Statement.RETURN_GENERATED_KEYS)) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 users.add(setUser(rs));
@@ -151,7 +149,8 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     private User addUserRole(User user) throws DataProcessingException {
-        String query = String.format("INSERT INTO %s (user_id, role_id) VALUES (?, ?)", USER_ROLE_TABLE);
+        String query = String.format("INSERT INTO %s (user_id, role_id) VALUES (?, ?)",
+                USER_ROLE_TABLE);
         try (PreparedStatement stmt = connection.prepareStatement(query,
                 Statement.RETURN_GENERATED_KEYS)) {
             stmt.setLong(1, user.getId());
@@ -162,6 +161,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
             throw new DataProcessingException("Unable to create user", e);
         }
     }
+
     private User setUser(ResultSet rs) throws SQLException {
         User user = new User(rs.getString("login"));
         user.setPassword(rs.getString("password"));

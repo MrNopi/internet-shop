@@ -25,8 +25,9 @@ public class RemoveOrderController extends HttpServlet {
         try {
             orderService.delete(orderId);
         } catch (DataProcessingException e) {
-            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
             LOGGER.error(e);
+            req.setAttribute("Msg", e);
+            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
         }
         resp.sendRedirect(req.getContextPath() + "/Servlet/index");
     }

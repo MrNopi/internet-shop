@@ -22,7 +22,6 @@ public class AddItemInBucketController extends HttpServlet {
     private static ItemService itemService;
     private static final Logger LOGGER = Logger.getLogger(AddItemInBucketController.class);
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -32,8 +31,9 @@ public class AddItemInBucketController extends HttpServlet {
         try {
             bucketService.addItem(bucket, itemService.get(itemId));
         } catch (DataProcessingException e) {
-            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
             LOGGER.error(e);
+            req.setAttribute("Msg", e);
+            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
         }
         resp.sendRedirect(req.getContextPath() + "/Servlet/ShowBucketItems");
     }

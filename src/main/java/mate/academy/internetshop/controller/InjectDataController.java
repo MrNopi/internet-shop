@@ -29,8 +29,9 @@ public class InjectDataController extends HttpServlet {
         try {
             userService.create(adminUser);
         } catch (DataProcessingException e) {
-            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
             LOGGER.error(e);
+            req.setAttribute("Msg", e);
+            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
         }
 
         resp.sendRedirect(req.getContextPath() + "/registration");

@@ -19,5 +19,5 @@ public interface UserDao {
 
     Optional<User> findByToken(String token) throws DataProcessingException;
 
-    public List<User> getAllUsers() throws DataProcessingException;
+    List<User> getAllUsers() throws DataProcessingException;
 }

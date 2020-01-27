@@ -33,7 +33,8 @@ public class ItemDaoImpl extends AbstractDao<Item> implements ItemDao {
             rs.next();
             item.setId(rs.getLong(1));
         } catch (SQLException e) {
-            throw new DataProcessingException("Cannot perform create for the current item with id ", e);
+            throw new DataProcessingException("Cannot perform create for the current item with id ",
+                    e);
         }
         return item;
     }

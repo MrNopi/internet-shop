@@ -33,8 +33,9 @@ public class CompleteOrderController extends HttpServlet {
             orderService.completeOrder(bucketService.get(userId).getItems(),
                     userService.get(userId));
         } catch (DataProcessingException e) {
-            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
+            req.setAttribute("Msg", e);
             LOGGER.error(e);
+            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
         }
         req.setAttribute("orders", orderService.getUserOrders(userId));
         req.getRequestDispatcher("/WEB-INF/views/ShowAllOrders.jsp").forward(req, resp);

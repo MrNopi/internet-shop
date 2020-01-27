@@ -31,8 +31,9 @@ public class ShowBucketItemsController extends HttpServlet {
         try {
             user = userService.get(userId);
         } catch (DataProcessingException e) {
-            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
             LOGGER.error(e);
+            req.setAttribute("Msg", e);
+            req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
         }
         Bucket bucket = bucketService.get(userId);
         req.setAttribute("user", user);

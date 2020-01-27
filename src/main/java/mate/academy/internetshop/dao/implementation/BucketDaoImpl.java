@@ -96,7 +96,8 @@ public class BucketDaoImpl extends AbstractDao<Bucket> implements BucketDao {
             stmt.setLong(1, bucketId);
             return stmt.execute();
         } catch (SQLException e) {
-            throw new DataProcessingException("Cannot perform remove for current bucket, cuz of: ", e);
+            throw new DataProcessingException("Cannot perform remove for current bucket, cuz of: ",
+                    e);
         }
     }
 
@@ -111,8 +112,11 @@ public class BucketDaoImpl extends AbstractDao<Bucket> implements BucketDao {
             throw new DataProcessingException("Can't clean current bucket, cuz of: ", e);
         }
     }
-    public boolean addItemInBucket(Item item, Long bucketId) throws DataProcessingException {
-        String query = String.format("INSERT INTO %s(bucket_id, item_id) VALUES(?,?)", BUCKET_ITEMS_TABLE);
+
+    public boolean addItemInBucket(Item item, Long bucketId)
+            throws DataProcessingException {
+        String query = String.format("INSERT INTO %s(bucket_id, item_id) VALUES(?,?)",
+                BUCKET_ITEMS_TABLE);
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setLong(1, bucketId);
             stmt.setLong(2, item.getId());
