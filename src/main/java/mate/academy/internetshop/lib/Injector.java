@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  * Students will implement this on Lesson 16 (Servlet)
@@ -14,6 +16,7 @@ import java.util.List;
 public class Injector {
     private static final String PROJECT_MAIN_PACKAGE = "mate.academy.internetshop";
     private static List<Class> classes = new ArrayList<>();
+    private static final Logger LOGGER = Logger.getLogger(Injector.class);
 
     static {
         try {
@@ -29,14 +32,14 @@ public class Injector {
                 if (field.getDeclaredAnnotation(Inject.class) != null) {
                     Object implementation = AnnotatedClassMap.getImplementation(field.getType());
                     if (implementation.getClass().getDeclaredAnnotation(Service.class) != null
-                            || implementation.getClass().getDeclaredAnnotation(Dao.class) != null) {
+                            || implementation.getClass().getDeclaredAnnotation(Dao.class) != null || field.getType().equals(Connection.class)) {
                         field.setAccessible(true);
                         field.set(null, implementation);
                     }
                 }
+                }
             }
         }
-    }
 
     /**
      * Scans all classes accessible from the context class loader,

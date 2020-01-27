@@ -1,0 +1,10 @@
+CREATE SCHEMA `shop` DEFAULT CHARACTER SET utf8;
+
+CREATE TABLE `shop`.`items` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `price` DECIMAL NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci;

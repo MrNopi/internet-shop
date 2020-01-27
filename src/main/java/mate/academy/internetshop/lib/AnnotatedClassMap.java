@@ -1,5 +1,6 @@
 package mate.academy.internetshop.lib;
 
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 import mate.academy.internetshop.dao.BucketDao;
