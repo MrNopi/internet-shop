@@ -24,13 +24,18 @@ public class Factory {
     private static OrderServiceImpl orderService;
     private static Connection connection;
     private static final Logger LOGGER = Logger.getLogger(Factory.class);
-    private static final String DB_NAME = "items";
+    private static final String DB_NAME = "shop";
+    private static final String LOGIN = "root";
+    private static final String PASSWORD = "Smartlike1998";
 
     public static Connection getConnection() {
         if (connection == null) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop?useUnicode=true&useJDBCCompliantTimezoneShift=true&serverTimezone=UTC", "root", "Smartlike1998");
+                connection = DriverManager.getConnection(String
+                        .format("jdbc:mysql://localhost:3306/%s?useUnicode=true"
+                                + "&useJDBCCompliantTimezoneShift=true"
+                                + "&serverTimezone=UTC", DB_NAME), LOGIN, PASSWORD);
             } catch (ClassNotFoundException | SQLException e) {
                 LOGGER.error("Unable to connect to database, named " + DB_NAME, e);
             }
@@ -40,14 +45,14 @@ public class Factory {
 
     public static UserDaoImpl getUserDaoImpl() {
         if (userDaoImpl == null) {
-            userDaoImpl = new UserDaoImpl();
+            userDaoImpl = new UserDaoImpl(getConnection());
         }
         return userDaoImpl;
     }
 
     public static BucketDaoImpl getBucketDaoImpl() {
         if (bucketDaoImpl == null) {
-            bucketDaoImpl = new BucketDaoImpl();
+            bucketDaoImpl = new BucketDaoImpl(getConnection());
         }
         return bucketDaoImpl;
     }
@@ -61,7 +66,7 @@ public class Factory {
 
     public static OrderDaoImpl getOrderDaoImpl() {
         if (orderDaoImpl == null) {
-            orderDaoImpl = new OrderDaoImpl();
+            orderDaoImpl = new OrderDaoImpl(getConnection());
         }
         return orderDaoImpl;
     }

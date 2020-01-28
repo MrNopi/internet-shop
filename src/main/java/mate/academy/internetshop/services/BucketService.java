@@ -1,24 +1,25 @@
 package mate.academy.internetshop.services;
 
 import java.util.List;
+import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.models.Bucket;
 import mate.academy.internetshop.models.Item;
 
 public interface BucketService {
 
-    public Bucket create(Bucket bucket);
+    Bucket create(Bucket bucket) throws DataProcessingException;
 
-    public Bucket get(long bucketId);
+    Bucket get(long bucketId);
 
-    public Bucket update(Bucket bucket);
+    Bucket update(Bucket bucket) throws DataProcessingException;
 
-    public boolean delete(long bucketId);
+    boolean delete(long bucketId) throws DataProcessingException;
 
-    public void addItem(Bucket bucket, Item item);
+    boolean addItem(Bucket bucket, Item item) throws DataProcessingException;
 
-    public void deleteItem(Bucket bucket, Item item);
+    void deleteItem(Bucket bucket, Item item);
 
-    public void clear(Bucket bucket);
+    boolean clear(Bucket bucket) throws DataProcessingException;
 
-    public List<Item> getAllItems(Bucket bucket);
+    List<Item> getAllItems(Bucket bucket);
 }

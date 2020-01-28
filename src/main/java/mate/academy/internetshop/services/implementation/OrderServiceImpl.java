@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import mate.academy.internetshop.dao.OrderDao;
 import mate.academy.internetshop.db.Storage;
+import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.lib.Service;
 import mate.academy.internetshop.models.Item;
@@ -19,30 +20,28 @@ public class OrderServiceImpl implements OrderService {
     private static OrderDao orderDao;
 
     @Override
-    public Order create(Order order) {
+    public Order create(Order order) throws DataProcessingException {
         return orderDao.create(order);
     }
 
     @Override
-    public Optional<Order> get(Long orderId) {
+    public Optional<Order> get(Long orderId) throws DataProcessingException {
         return orderDao.get(orderId);
     }
 
     @Override
-    public Order update(Order order) {
+    public Order update(Order order) throws DataProcessingException {
         return orderDao.update(order);
     }
 
     @Override
-    public boolean delete(Long orderId) {
+    public boolean delete(Long orderId) throws DataProcessingException {
         return orderDao.delete(orderId);
     }
 
     @Override
-    public Order completeOrder(List<Item> items, User user) {
-        Order order = new Order(user).setItems(items);
-        Storage.orders.add(order);
-        return order;
+    public Order completeOrder(List<Item> items, User user) throws DataProcessingException {
+        return orderDao.completeOrder(items, user);
     }
 
     @Override

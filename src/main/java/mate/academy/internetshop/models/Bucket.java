@@ -12,6 +12,9 @@ public class Bucket {
         this.userId = user.getId();
     }
 
+    public Bucket() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -34,10 +37,6 @@ public class Bucket {
 
     public void setItems(List<Item> items) {
         this.items = items;
-    }
-
-    public List<Item> getAllItems() {
-        return items;
     }
 
     @Override

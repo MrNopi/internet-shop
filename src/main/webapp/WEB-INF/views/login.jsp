@@ -19,6 +19,6 @@
     </form>
     <p>Don't have an account,<a href="${pageContext.request.contextPath}/registration"> Sign Up</a></p>
 </div>
-<a href="${pageContext.request.contextPath}/index">Back to main menu</a>
+<a href="${pageContext.request.contextPath}/Servlet/index">Back to main menu</a>
 </body>
 </html>

@@ -3,6 +3,7 @@ package mate.academy.internetshop.services.implementation;
 import java.util.List;
 import java.util.NoSuchElementException;
 import mate.academy.internetshop.dao.BucketDao;
+import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.lib.Service;
 import mate.academy.internetshop.models.Bucket;
@@ -15,7 +16,7 @@ public class BucketServiceImpl implements BucketService {
     static BucketDao bucketDao;
 
     @Override
-    public Bucket create(Bucket bucket) {
+    public Bucket create(Bucket bucket) throws DataProcessingException {
         return bucketDao.create(bucket);
     }
 
@@ -25,18 +26,18 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public Bucket update(Bucket bucket) {
+    public Bucket update(Bucket bucket) throws DataProcessingException {
         return bucketDao.update(bucket);
     }
 
     @Override
-    public boolean delete(long bucketId) {
+    public boolean delete(long bucketId) throws DataProcessingException {
         return bucketDao.delete(bucketId);
     }
 
     @Override
-    public void addItem(Bucket bucket, Item item) {
-        bucket.items.add(item);
+    public boolean addItem(Bucket bucket, Item item) throws DataProcessingException {
+        return bucketDao.addItemInBucket(item, bucket.getId());
     }
 
     @Override
@@ -45,8 +46,8 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public void clear(Bucket bucket) {
-        bucket.items.clear();
+    public boolean clear(Bucket bucket) throws DataProcessingException {
+        return bucketDao.clear(bucket.getId());
     }
 
     @Override
