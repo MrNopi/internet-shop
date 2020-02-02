@@ -1,4 +1,4 @@
-package mate.academy.internetshop.controller;
+package mate.academy.internetshop.controller.Items;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -12,23 +12,24 @@ import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.services.ItemService;
 import org.apache.log4j.Logger;
 
-@WebServlet(urlPatterns = "/Servlet/Items")
-public class ShowAllItemsController extends HttpServlet {
+@WebServlet(urlPatterns = "/Servlet/deleteItem")
+public class DeleteItemController extends HttpServlet {
     @Inject
     private static ItemService itemService;
-    private static final Logger LOGGER = Logger.getLogger(ShowAllItemsController.class);
+    private static final Logger LOGGER = Logger.getLogger(DeleteItemController.class);
 
     @Override
     protected void doGet(HttpServletRequest req,
                          HttpServletResponse resp)
             throws ServletException, IOException {
+        Long id = Long.valueOf(req.getParameter("itemId"));
         try {
-            req.setAttribute("items", itemService.getAllItems());
+            itemService.delete(id);
         } catch (DataProcessingException e) {
             LOGGER.error(e);
             req.setAttribute("Msg", e);
             req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
         }
-        req.getRequestDispatcher("/WEB-INF/views/showAllItems.jsp").forward(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/Servlet/index");
     }
 }
