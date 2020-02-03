@@ -61,7 +61,7 @@ public class BucketDaoImpl extends AbstractDao<Bucket> implements BucketDao {
                 item.setId(rs.getLong(1));
                 items.add(item);
             }
-            bucket = new Bucket();
+            bucket = new Bucket(rs.getLong("user_id"));
             bucket.setId(bucketId);
             bucket.setItems(items);
         } catch (SQLException e) {
@@ -100,6 +100,7 @@ public class BucketDaoImpl extends AbstractDao<Bucket> implements BucketDao {
                     e);
         }
     }
+
 
     public boolean clear(Long bucketId) throws DataProcessingException {
         String query = String.format("DELETE FROM %s WHERE bucket_id=?;\n", BUCKET_ITEMS_TABLE);

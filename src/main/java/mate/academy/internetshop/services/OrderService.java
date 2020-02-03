@@ -9,15 +9,15 @@ import mate.academy.internetshop.models.User;
 
 public interface OrderService {
 
-    public Order create(Order order) throws DataProcessingException;
+    Order create(Order order) throws DataProcessingException;
 
-    public Optional<Order> get(Long orderId) throws DataProcessingException;
+    Optional<Order> get(Long orderId) throws DataProcessingException;
 
-    public Order update(Order order) throws DataProcessingException;
+    Order update(Order order) throws DataProcessingException;
 
-    public boolean delete(Long orderId) throws DataProcessingException;
+    boolean delete(Long orderId) throws DataProcessingException;
 
-    public Order completeOrder(List<Item> items, User user) throws DataProcessingException;
+    Order completeOrder(List<Item> items, User user) throws DataProcessingException;
 
-    public List<Order> getUserOrders(Long userId);
+    List<Order> getUserOrders(Long userId) throws DataProcessingException;
 }

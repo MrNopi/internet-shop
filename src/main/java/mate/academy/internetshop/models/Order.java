@@ -8,13 +8,6 @@ public class Order {
     private Long userId;
     private List<Item> items = new ArrayList<>();
 
-    public Order(Long userId) {
-        this.userId = userId;
-    }
-
-    public Order() {
-    }
-
     public Long getId() {
         return id;
     }

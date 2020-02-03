@@ -102,7 +102,6 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
         }
     }
 
-    @Override
     public Order completeOrder(List<Item> items, User user)
             throws DataProcessingException {
         String query = String.format("INSERT INTO %s(user_id) VALUES(?)", ORDERS_TABLE);
@@ -140,17 +139,26 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
     }
 
     private Order addAllItems(Order order) throws DataProcessingException {
-        String query = String.format("INSERT INTO %s (order_id, item_id) VALUES (?,?)",
-                ORDERS_ITEMS_TABLE);
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setLong(1, order.getId());
-            for (Item item : order.getItems()) {
-                stmt.setLong(2, item.getId());
-                stmt.executeUpdate();
+        return addAllItems(order.getItems(), order.getId());
+    }
+
+    public List<Order> getAllOrders(Long userId) throws DataProcessingException {
+        List<Order> orders = new ArrayList<>();
+       String query = String.format("SELECT order_items_id FROM %2$s\n"
+               + "INNER JOIN %3$s ON %2$s.item_id = id\n"
+               + "INNER JOIN %1$s ON %2$s.order_id = %1$s.order_id\n"
+               + "WHERE %1$s.order_id = ?;",
+               ORDERS_TABLE, ORDERS_ITEMS_TABLE, ITEMS_TABLE);
+       try (PreparedStatement stmt = connection.prepareStatement(query,
+               Statement.RETURN_GENERATED_KEYS)) {
+           stmt.setLong(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                orders.add(get(rs.getLong(1)).get());
             }
-        } catch (SQLException e) {
-            throw new DataProcessingException("Unable to update order", e);
-        }
-        return order;
+       } catch (SQLException e) {
+           throw new DataProcessingException("Unable to get Order", e);
+       }
+       return orders;
     }
 }

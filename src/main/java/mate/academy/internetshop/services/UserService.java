@@ -9,17 +9,17 @@ import mate.academy.internetshop.models.User;
 
 public interface UserService {
 
-    public User create(User user) throws DataProcessingException;
+    User create(User user) throws DataProcessingException;
 
-    public User get(Long userId) throws DataProcessingException;
+    User get(Long userId) throws DataProcessingException;
 
-    public User update(User user) throws DataProcessingException;
+    User update(User user) throws DataProcessingException;
 
-    public boolean delete(Long userId) throws DataProcessingException;
+    boolean delete(Long userId) throws DataProcessingException;
 
-    public List<User> getAllUsers();
+    List<User> getAllUsers() throws DataProcessingException;
 
-    public User login(String login, String password)
+    User login(String login, String password)
             throws AuthorisationException, DataProcessingException;
 
     Optional<User> findByToken(String token) throws DataProcessingException;

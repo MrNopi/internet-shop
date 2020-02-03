@@ -6,13 +6,13 @@ import mate.academy.internetshop.models.Item;
 
 public interface ItemService {
 
-    public Item create(Item item) throws DataProcessingException;
+    Item create(Item item) throws DataProcessingException;
 
-    public Item get(Long itemId) throws DataProcessingException;
+    Item get(Long itemId) throws DataProcessingException;
 
-    public Item update(Item item) throws DataProcessingException;
+    Item update(Item item) throws DataProcessingException;
 
-    public boolean delete(Long itemId) throws DataProcessingException;
+    boolean delete(Long itemId) throws DataProcessingException;
 
-    public List<Item> getAllItems() throws DataProcessingException;
+    List<Item> getAllItems() throws DataProcessingException;
 }

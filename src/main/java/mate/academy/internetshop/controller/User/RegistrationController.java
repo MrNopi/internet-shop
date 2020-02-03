@@ -37,7 +37,7 @@ public class RegistrationController extends HttpServlet {
         newUser.setPassword(req.getParameter("password"));
         try {
             userService.create(newUser);
-            bucketService.create(new Bucket(newUser));
+            bucketService.create(new Bucket(newUser.getId()));
         } catch (DataProcessingException e) {
             LOGGER.error(e);
             req.setAttribute("Msg", e);

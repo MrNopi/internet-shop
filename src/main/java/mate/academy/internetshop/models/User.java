@@ -25,13 +25,14 @@ public class User {
     }
 
     public User() {
+        setToken();
     }
 
     public String getToken() {
         return token.toString();
     }
 
-    public void setToken() {
+    private void setToken() {
         token = UUID.nameUUIDFromBytes((login + password).getBytes());
     }
 

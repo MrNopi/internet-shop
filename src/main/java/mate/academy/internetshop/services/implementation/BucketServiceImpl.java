@@ -1,6 +1,5 @@
 package mate.academy.internetshop.services.implementation;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 import mate.academy.internetshop.dao.BucketDao;
 import mate.academy.internetshop.exception.DataProcessingException;
@@ -43,15 +42,5 @@ public class BucketServiceImpl implements BucketService {
     @Override
     public void deleteItem(Bucket bucket, Item item) {
         bucket.items.remove(item);
-    }
-
-    @Override
-    public boolean clear(Bucket bucket) throws DataProcessingException {
-        return bucketDao.clear(bucket.getId());
-    }
-
-    @Override
-    public List<Item> getAllItems(Bucket bucket) {
-        return bucket.items;
     }
 }

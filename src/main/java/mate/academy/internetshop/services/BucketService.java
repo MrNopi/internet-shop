@@ -18,8 +18,4 @@ public interface BucketService {
     boolean addItem(Bucket bucket, Item item) throws DataProcessingException;
 
     void deleteItem(Bucket bucket, Item item);
-
-    boolean clear(Bucket bucket) throws DataProcessingException;
-
-    List<Item> getAllItems(Bucket bucket);
 }
