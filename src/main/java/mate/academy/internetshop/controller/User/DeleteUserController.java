@@ -1,4 +1,4 @@
-package mate.academy.internetshop.controller;
+package mate.academy.internetshop.controller.User;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,36 +9,27 @@ import javax.servlet.http.HttpServletResponse;
 
 import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Inject;
-import mate.academy.internetshop.models.Bucket;
-import mate.academy.internetshop.models.Item;
-import mate.academy.internetshop.services.BucketService;
-import mate.academy.internetshop.services.ItemService;
+import mate.academy.internetshop.services.UserService;
 import org.apache.log4j.Logger;
 
-@WebServlet(urlPatterns = "/Servlet/deleteFromBucket")
-public class DeleteFromBucketController extends HttpServlet {
+@WebServlet(urlPatterns = "/Servlet/deleteUser")
+public class DeleteUserController extends HttpServlet {
     @Inject
-    private static BucketService bucketService;
-    @Inject
-    private static ItemService itemService;
-    private static final Logger LOGGER = Logger.getLogger(DeleteFromBucketController.class);
+    private static UserService userService;
+    private static final Logger LOGGER = Logger.getLogger(DeleteUserController.class);
 
     @Override
     protected void doGet(HttpServletRequest req,
                          HttpServletResponse resp)
             throws ServletException, IOException {
-        Long userId = (Long)req.getSession().getAttribute("userId");
-        Long itemId = Long.valueOf(req.getParameter("item"));
-        Bucket bucket = bucketService.get(userId);
-        Item item = null;
+        Long userId = Long.valueOf(req.getParameter("userId"));
         try {
-            item = itemService.get(itemId);
+            userService.delete(userId);
         } catch (DataProcessingException e) {
             LOGGER.error(e);
             req.setAttribute("Msg", e);
             req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
         }
-        bucketService.deleteItem(bucket, item);
         resp.sendRedirect(req.getContextPath() + "/Servlet/index");
     }
 }

@@ -4,16 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.models.Item;
+import mate.academy.internetshop.models.Order;
 
-public interface ItemDao {
-
-    Item create(Item item) throws DataProcessingException;
-
-    Optional<Item> get(Long itemId) throws DataProcessingException;
-
-    Item update(Item item) throws DataProcessingException;
-
-    boolean delete(Long itemId) throws DataProcessingException;
+public interface ItemDao extends GenericDao<Item> {
 
     List<Item> getAllItems() throws DataProcessingException;
 }

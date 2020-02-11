@@ -19,6 +19,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     private static final String USER_TABLE = "users";
     private static final String USER_ROLE_TABLE = "users_roles";
     private static final String ROLE_TABLE = "roles";
+    private static final Long USER_ROLE_ID = 1L;
 
     public UserDaoImpl(Connection connection) {
         super(connection);
@@ -35,18 +36,18 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
             stmt.setString(3, user.getToken());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
-            rs.next();
-            user.setId(rs.getLong(1));
+            if (rs.next()) {
+                user.setId(rs.getLong(1));
+            }
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to create user", e);
         }
-
         return addUserRole(user);
     }
 
     @Override
     public Optional<User> get(Long userId) throws DataProcessingException {
-        User user;
+        User user = null;
         String query = String.format("SELECT %1$s.user_id, login, password, token, role FROM %1$s"
                 + " INNER JOIN %2$s ON %1$s.user_id = %2$s.user_id"
                 + " INNER JOIN roles ON %2$s.role_id = roles.role_id"
@@ -55,12 +56,13 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
                 Statement.RETURN_GENERATED_KEYS)) {
             stmt.setLong(1, userId);
             ResultSet rs = stmt.executeQuery();
-            rs.next();
-            user = setUser(rs);
+            if (rs.next()) {
+                user = setUser(rs);
+            }
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to get user", e);
         }
-        return Optional.of(user);
+        return Optional.ofNullable(user);
     }
 
     @Override
@@ -91,45 +93,33 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         }
     }
 
-    @Override
-    public Optional<User> getUserByLogin(String login) throws DataProcessingException {
-        String query = String.format("SELECT user_id, password, token FROM %s WHERE login=?",
-                USER_TABLE);
-        User user = new User(login);
+
+    public Optional<User> getByParameter(String query, String parameter) throws DataProcessingException {
         try (PreparedStatement stmt = connection.prepareStatement(query,
                 Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setString(1, login);
+            stmt.setString(1, parameter);
             ResultSet rs = stmt.executeQuery();
             rs.next();
-            user.setPassword(rs.getString("password"));
-            user.setToken(rs.getString("token"));
-            user.setId(rs.getLong(1));
+                return Optional.of(setUser(rs));
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to find user", e);
         }
-        return Optional.of(user);
     }
 
-    @Override
+    public Optional<User> getUserByLogin(String login) throws DataProcessingException {
+        String query = String.format("SELECT user_id, password, token FROM %s WHERE login=?",
+                USER_TABLE);
+        return getByParameter(query, login);
+    }
+
     public Optional<User> findByToken(String token) throws DataProcessingException {
-        User user = null;
         String query = String.format("SELECT %1$s.user_id, login, password, token, role FROM %1$s"
                 + " INNER JOIN %2$s ON %1$s.user_id = %2$s.user_id"
                 + " INNER JOIN roles ON %2$s.role_id = roles.role_id"
                 + " WHERE %1$s.token = ?;", USER_TABLE, USER_ROLE_TABLE);
-        try (PreparedStatement stmt = connection.prepareStatement(query,
-                Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setString(1, token);
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
-            user = setUser(rs);
-        } catch (SQLException e) {
-            throw new DataProcessingException("Unable to find user", e);
-        }
-        return Optional.of(user);
+        return getByParameter(query, token);
     }
 
-    @Override
     public List<User> getAllUsers() throws DataProcessingException {
         List<User> users = new ArrayList<>();
         String query = String.format("SELECT %1$s.user_id, login, password, role FROM shop.%1$s\n"
@@ -154,7 +144,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         try (PreparedStatement stmt = connection.prepareStatement(query,
                 Statement.RETURN_GENERATED_KEYS)) {
             stmt.setLong(1, user.getId());
-            stmt.setInt(2, 1);
+            stmt.setLong(2, USER_ROLE_ID);
             stmt.executeUpdate();
             return user;
         } catch (SQLException e) {

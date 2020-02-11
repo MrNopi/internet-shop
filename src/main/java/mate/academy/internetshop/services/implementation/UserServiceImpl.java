@@ -5,7 +5,6 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import mate.academy.internetshop.dao.UserDao;
-import mate.academy.internetshop.db.Storage;
 import mate.academy.internetshop.exception.AuthorisationException;
 import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Inject;
@@ -25,9 +24,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User get(Long userId) throws DataProcessingException {
-        User user = userDao.get(userId)
+        return userDao.get(userId)
                 .orElseThrow(NoSuchElementException::new);
-        return user;
     }
 
     @Override
@@ -40,8 +38,8 @@ public class UserServiceImpl implements UserService {
         return userDao.delete(userId);
     }
 
-    public List<User> getAllUsers() {
-        return Storage.users;
+    public List<User> getAllUsers() throws DataProcessingException {
+        return userDao.getAllUsers();
     }
 
     @Override

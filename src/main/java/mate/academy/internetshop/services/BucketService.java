@@ -9,7 +9,7 @@ public interface BucketService {
 
     Bucket create(Bucket bucket) throws DataProcessingException;
 
-    Bucket get(long bucketId);
+    Bucket get(long bucketId) throws DataProcessingException;
 
     Bucket update(Bucket bucket) throws DataProcessingException;
 
@@ -17,9 +17,5 @@ public interface BucketService {
 
     boolean addItem(Bucket bucket, Item item) throws DataProcessingException;
 
-    void deleteItem(Bucket bucket, Item item);
-
-    boolean clear(Bucket bucket) throws DataProcessingException;
-
-    List<Item> getAllItems(Bucket bucket);
+    void deleteItem(Bucket bucket, Item item) throws DataProcessingException;
 }

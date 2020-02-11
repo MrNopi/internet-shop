@@ -7,15 +7,9 @@ import mate.academy.internetshop.models.Item;
 import mate.academy.internetshop.models.Order;
 import mate.academy.internetshop.models.User;
 
-public interface OrderDao {
-
-    Order create(Order order) throws DataProcessingException;
-
-    Optional<Order> get(Long orderId) throws DataProcessingException;
-
-    Order update(Order order) throws DataProcessingException;
-
-    boolean delete(Long orderId) throws DataProcessingException;
+public interface OrderDao extends GenericDao<Order>{
 
     Order completeOrder(List<Item> items, User user) throws DataProcessingException;
+
+    List<Order> getAllOrders(Long userId) throws DataProcessingException;
 }

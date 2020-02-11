@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import mate.academy.internetshop.dao.OrderDao;
-import mate.academy.internetshop.db.Storage;
 import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.lib.Service;
@@ -45,9 +44,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getUserOrders(Long userId) {
-        return Storage.orders.stream()
-                .filter(x -> x.getUserId().equals(userId))
-                .collect(Collectors.toList());
+    public List<Order> getUserOrders(Long userId) throws DataProcessingException {
+        return orderDao.getAllOrders(userId);
     }
 }

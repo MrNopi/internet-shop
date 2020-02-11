@@ -23,12 +23,11 @@ public class Factory {
     private static ItemServiceImpl itemService;
     private static OrderServiceImpl orderService;
     private static Connection connection;
-    private static final Logger LOGGER = Logger.getLogger(Factory.class);
     private static final String DB_NAME = "shop";
     private static final String LOGIN = "root";
-    private static final String PASSWORD = "Smartlike1998";
+    private static final String PASSWORD = "pass";
 
-    public static Connection getConnection() {
+    private static Connection getConnection() {
         if (connection == null) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -37,7 +36,7 @@ public class Factory {
                                 + "&useJDBCCompliantTimezoneShift=true"
                                 + "&serverTimezone=UTC", DB_NAME), LOGIN, PASSWORD);
             } catch (ClassNotFoundException | SQLException e) {
-                LOGGER.error("Unable to connect to database, named " + DB_NAME, e);
+                throw new RuntimeException("Unable to connect database");
             }
         }
         return connection;

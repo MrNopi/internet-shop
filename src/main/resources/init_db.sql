@@ -116,7 +116,3 @@ CREATE TABLE `shop`.`orders` (
     REFERENCES `shop`.`users` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-
-
-//TO DO
-ADD UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE;

@@ -83,7 +83,6 @@ public class ItemDaoImpl extends AbstractDao<Item> implements ItemDao {
         }
     }
 
-    @Override
     public List<Item> getAllItems() throws DataProcessingException {
         List<Item> items = new ArrayList<>();
         String query = String.format("SELECT * FROM %s;", ITEMS_TABLE);
