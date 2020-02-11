@@ -93,14 +93,14 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         }
     }
 
-
-    public Optional<User> getByParameter(String query, String parameter) throws DataProcessingException {
+    public Optional<User> getByParameter(String query, String parameter)
+            throws DataProcessingException {
         try (PreparedStatement stmt = connection.prepareStatement(query,
                 Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, parameter);
             ResultSet rs = stmt.executeQuery();
             rs.next();
-                return Optional.of(setUser(rs));
+            return Optional.of(setUser(rs));
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to find user", e);
         }
@@ -123,8 +123,8 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     public List<User> getAllUsers() throws DataProcessingException {
         List<User> users = new ArrayList<>();
         String query = String.format("SELECT %1$s.user_id, login, password, role FROM shop.%1$s\n"
-                + "INNER JOIN shop.%2$s ON %1$s.user_id = %2$s.user_id\n"
-                + "INNER JOIN shop.%3$s ON %2$s.role_id = %3$s.role_id;",
+                        + "INNER JOIN shop.%2$s ON %1$s.user_id = %2$s.user_id\n"
+                        + "INNER JOIN shop.%3$s ON %2$s.role_id = %3$s.role_id;",
                 USER_TABLE, USER_ROLE_TABLE, ROLE_TABLE);
         try (PreparedStatement stmt = connection.prepareStatement(query,
                 Statement.RETURN_GENERATED_KEYS)) {

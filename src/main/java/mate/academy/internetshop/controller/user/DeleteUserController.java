@@ -1,4 +1,4 @@
-package mate.academy.internetshop.controller.Items;
+package mate.academy.internetshop.controller.user;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,22 +9,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Inject;
-import mate.academy.internetshop.services.ItemService;
+import mate.academy.internetshop.services.UserService;
 import org.apache.log4j.Logger;
 
-@WebServlet(urlPatterns = "/Servlet/deleteItem")
-public class DeleteItemController extends HttpServlet {
+@WebServlet(urlPatterns = "/Servlet/deleteUser")
+public class DeleteUserController extends HttpServlet {
     @Inject
-    private static ItemService itemService;
-    private static final Logger LOGGER = Logger.getLogger(DeleteItemController.class);
+    private static UserService userService;
+    private static final Logger LOGGER = Logger.getLogger(DeleteUserController.class);
 
     @Override
     protected void doGet(HttpServletRequest req,
                          HttpServletResponse resp)
             throws ServletException, IOException {
-        Long id = Long.valueOf(req.getParameter("itemId"));
+        Long userId = Long.valueOf(req.getParameter("userId"));
         try {
-            itemService.delete(id);
+            userService.delete(userId);
         } catch (DataProcessingException e) {
             LOGGER.error(e);
             req.setAttribute("Msg", e);

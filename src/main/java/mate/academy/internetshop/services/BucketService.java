@@ -1,6 +1,5 @@
 package mate.academy.internetshop.services;
 
-import java.util.List;
 import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.models.Bucket;
 import mate.academy.internetshop.models.Item;

@@ -11,7 +11,6 @@ import mate.academy.internetshop.exception.AuthorisationException;
 import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.models.User;
-import mate.academy.internetshop.services.BucketService;
 import mate.academy.internetshop.services.UserService;
 import org.apache.log4j.Logger;
 

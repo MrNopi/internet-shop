@@ -11,7 +11,6 @@ import mate.academy.internetshop.services.implementation.BucketServiceImpl;
 import mate.academy.internetshop.services.implementation.ItemServiceImpl;
 import mate.academy.internetshop.services.implementation.OrderServiceImpl;
 import mate.academy.internetshop.services.implementation.UserServiceImpl;
-import org.apache.log4j.Logger;
 
 public class Factory {
     private static UserDaoImpl userDaoImpl;

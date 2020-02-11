@@ -101,7 +101,6 @@ public class BucketDaoImpl extends AbstractDao<Bucket> implements BucketDao {
         }
     }
 
-
     public boolean clear(Long bucketId) throws DataProcessingException {
         String query = String.format("DELETE FROM %s WHERE bucket_id=?;\n", BUCKET_ITEMS_TABLE);
         try (PreparedStatement stmt = connection.prepareStatement(query,

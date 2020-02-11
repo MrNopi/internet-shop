@@ -1,4 +1,4 @@
-package mate.academy.internetshop.controller.Bucket;
+package mate.academy.internetshop.controller.bucket;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,7 +6,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import mate.academy.internetshop.exception.DataProcessingException;
 import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.models.Bucket;
@@ -16,16 +15,16 @@ import org.apache.log4j.Logger;
 
 @WebServlet(urlPatterns = "/Servlet/addToBucket")
 public class AddItemInBucketController extends HttpServlet {
+    private static final Logger LOGGER = Logger.getLogger(AddItemInBucketController.class);
     @Inject
     private static BucketService bucketService;
     @Inject
     private static ItemService itemService;
-    private static final Logger LOGGER = Logger.getLogger(AddItemInBucketController.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        Long userId = (Long)req.getSession().getAttribute("userId");
+        Long userId = (Long) req.getSession().getAttribute("userId");
         Long itemId = Long.valueOf(req.getParameter("itemId"));
         try {
             Bucket bucket = bucketService.get(userId);

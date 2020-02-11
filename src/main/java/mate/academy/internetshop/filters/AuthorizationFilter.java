@@ -18,7 +18,6 @@ import mate.academy.internetshop.lib.Inject;
 import mate.academy.internetshop.models.Role;
 import mate.academy.internetshop.models.User;
 import mate.academy.internetshop.services.UserService;
-import org.apache.log4j.Logger;
 
 @WebFilter("/Servlet/*")
 public class AuthorizationFilter implements Filter {
