@@ -33,8 +33,9 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
             stmt.setLong(1, order.getUserId());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
-            rs.next();
-            order.setId(rs.getLong(1));
+            if(rs.next()) {
+                order.setId(rs.getLong(1));
+            }
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to create order", e);
         }

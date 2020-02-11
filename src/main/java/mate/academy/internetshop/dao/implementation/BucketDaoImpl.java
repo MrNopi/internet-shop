@@ -42,7 +42,7 @@ public class BucketDaoImpl extends AbstractDao<Bucket> implements BucketDao {
     }
 
     @Override
-    public Optional<Bucket> get(Long bucketId) {
+    public Optional<Bucket> get(Long bucketId) throws DataProcessingException {
         String query = String.format(
                 "SELECT %1$s.bucket_id, %1$s.user_id, %2$s.name, %2$s.price FROM %2$s\n"
                         + "INNER JOIN %3$s ON %3$s.item_id = %2$s.id\n"
@@ -65,7 +65,7 @@ public class BucketDaoImpl extends AbstractDao<Bucket> implements BucketDao {
             bucket.setId(bucketId);
             bucket.setItems(items);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataProcessingException("Unable to get Bucket", e);
         }
         return Optional.ofNullable(bucket);
     }

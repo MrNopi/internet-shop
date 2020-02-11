@@ -1,4 +1,4 @@
-#_Project purpose_
+# _Project purpose_
 
 This is a template for creating an e-store.
 
@@ -22,7 +22,7 @@ There are controllers for working with items, users, orders and buckets:
 
 8. _Logout - for logging out._
 
-#_Project Structure_
+# _Project Structure_
 - Java 11
 - Maven 4.0.0
 - javax.servlet 3.1.0
@@ -31,24 +31,24 @@ There are controllers for working with items, users, orders and buckets:
 - maven-checkstyle-plugin
 - JDBC
 
-###For developer
+### For developer
 
 Open the project in your IDE.
 
 Add it as maven project.
 
-####Configure Tomcat:
+#### Configure Tomcat:
 - add artifact;
 - add sdk 11.0.3 or later
 
-####Configure the project
+#### Configure the project
 1. _Add sdk 11.0.3 in project struсture._
 
 2. _Initialize data base copying code from init_db.sql, which located in project_name/src/main/resources/init_db.sql_
 
-3. _At interntetshop.src.main.java.Factory class use username and password for your DB to create a Connection._
+3. _At internet-shop.src.main.java.Factory class use username and password for your DB to create a Connection._
 
-4. _Change a path in interntetshop.src.main.java.resources.log4j.properties. It has to reach your logFile._
+4. _Change a path in internet-shop.src.main.java.resources.log4j.properties. It has to reach your logFile._
 
 5. _fill up database with items, users and everything you need...._
 
