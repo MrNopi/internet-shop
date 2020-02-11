@@ -27,8 +27,8 @@ public class AddItemInBucketController extends HttpServlet {
             throws ServletException, IOException {
         Long userId = (Long)req.getSession().getAttribute("userId");
         Long itemId = Long.valueOf(req.getParameter("itemId"));
-        Bucket bucket = bucketService.get(userId);
         try {
+            Bucket bucket = bucketService.get(userId);
             bucketService.addItem(bucket, itemService.get(itemId));
         } catch (DataProcessingException e) {
             LOGGER.error(e);
