@@ -1,0 +1,12 @@
+# Compiled class file
+*.class
+diamond.iml
+
+target/
+.idea/
+# Log file
+*.log
+
+# Package Files #
+*.jar
+*.war
